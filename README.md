@@ -1,4 +1,4 @@
-# pert-tread-drv
+# com-linear-drv
 Commutator linear drive harp device.
 
 Provides control of the treadmill's drive belt and tilt mechanism from Bonsai.
