@@ -63,6 +63,30 @@ class FaulhaberDrive():
     def speed(self, value):
         self._parameter('SP', value)
 
+    @property
+    def cont_cur(self):
+        return self._query('GCC')
+
+    @cont_cur.setter
+    def cont_cur(self, value):
+        self._parameter('LCC', value)
+
+    @property
+    def peak_cur(self):
+        return self._query('GPC')
+
+    @peak_cur.setter
+    def peak_cur(self, value):
+        self._parameter('LCP', value)
+
+    @property
+    def range_lim(self):
+        return '0'
+
+    @range_lim.setter
+    def range_lim(self, value):
+        self._parameter('APL', value)
+
     def __init__(self, uart, address):
         """Constructor. Initialises the class."""
         self.uart = uart

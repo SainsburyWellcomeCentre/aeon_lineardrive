@@ -1,20 +1,21 @@
-"""Pertubation treadmill register classes."""
+"""Con Linear Drive register classes."""
 from microharp.types import HarpTypes
 from microharp.register import ReadWriteReg, ReadOnlyReg
 
 
 class EnableReg(ReadWriteReg):
 
-    """Pertubation treadmill EnableReg register.
+    """Con Linear Drive EnableReg register.
 
     Non-zero writes enable the drive, writes of zero disable the drive,
     Reads return (1,) or (0,) for the enabled or disabled states respectively.
     """
 
-    def __init__(self, drive, estop):
+#    def __init__(self, drive, estop):
+    def __init__(self, drive):
         super().__init__(HarpTypes.U8)
         self.drive = drive
-        self.estop = estop
+#        self.estop = estop
 
     def read(self, typ):
         self.value = (int(self.drive.en),)
@@ -22,12 +23,13 @@ class EnableReg(ReadWriteReg):
 
     def write(self, typ, value):
         super().write(typ, value)
-        self.drive.en = bool(self.value[0])# and not self.estop.value()
+#        self.drive.en = bool(self.value[0]) and not self.estop.value()
+        self.drive.en = bool(self.value[0])
 
 
 class PositionLimReg(ReadWriteReg):
 
-    """Pertubation treadmill PositionLimReg register.
+    """Con Linear Drive PositionLimReg register.
 
     Writes set the position limits of drive, reads return the set limits.
     """
@@ -51,7 +53,7 @@ class PositionLimReg(ReadWriteReg):
 
 class PositionHomeReg(ReadWriteReg):
 
-    """Pertubation treadmill PositionHomeReg register.
+    """Con Linear Drive PositionHomeReg register.
 
     Writes set the home position of the drive, reads return the previous write value.
     """
@@ -67,7 +69,7 @@ class PositionHomeReg(ReadWriteReg):
 
 class PositionSetReg(ReadWriteReg):
 
-    """Pertubation treadmill PositionSetReg register.
+    """Con Linear Drive PositionSetReg register.
 
     Writes set the absolute position of drive, reads return the previous write value.
     """
@@ -83,7 +85,7 @@ class PositionSetReg(ReadWriteReg):
 
 class PositionActReg(ReadOnlyReg):
 
-    """Pertubation treadmill PositionActReg register.
+    """Con Linear Drive PositionActReg register.
 
     Reads return the current position of drive.
     """
@@ -101,13 +103,13 @@ class PositionActReg(ReadOnlyReg):
 
 class SpeedLimReg(ReadWriteReg):
 
-    """Pertubation treadmill SpeedLimReg register.
+    """Con Linear Drive SpeedLimReg register.
 
     Writes set the speed limit of drive, reads return the limit.
     """
 
     def __init__(self, drive):
-        super().__init__(HarpTypes.U16, (2000,))
+        super().__init__(HarpTypes.U16, (7583,))
         self.drive = drive
         self.drive.speed = self.value[0]
 
@@ -124,7 +126,7 @@ class SpeedLimReg(ReadWriteReg):
 
 class VelocitySetReg(ReadWriteReg):
 
-    """Pertubation treadmill VelocitySetReg register.
+    """Con Linear Drive VelocitySetReg register.
 
     Writes set the velocity of drive, reads return the previous write value.
     """
@@ -140,7 +142,7 @@ class VelocitySetReg(ReadWriteReg):
 
 class VelocityActReg(ReadOnlyReg):
 
-    """Pertubation treadmill VelocityActReg register.
+    """Con Linear Drive VelocityActReg register.
 
     Reads return the current velocity of drive.
     """
@@ -154,3 +156,62 @@ class VelocityActReg(ReadOnlyReg):
         if velocity is not None:
             self.value = (velocity,)
         return super().read(typ)
+
+class ContCurLimReg(ReadWriteReg):
+
+    """Con Linear Drive ConsCurLimReg register.
+
+    Writes set the continuous current limit of drive, reads return the limit.
+    """
+
+    def __init__(self, drive):
+        super().__init__(HarpTypes.U16, (900,))
+        self.drive = drive
+        self.drive.cont_cur = self.value[0]
+
+    def read(self, typ):
+        cont_cur = self.drive.cont_cur
+        if cont_cur is not None:
+            self.value = (cont_cur,)
+        return super().read(typ)
+
+    def write(self, typ, value):
+        super().write(typ, value)
+        self.drive.cont_cur = self.value[0]
+        
+class PeakCurLimReg(ReadWriteReg):
+
+    """Con Linear Drive PeakCurLimReg register.
+
+    Writes set the peak current limit of drive, reads return the limit.
+    """
+
+    def __init__(self, drive):
+        super().__init__(HarpTypes.U16, (900,))
+        self.drive = drive
+        self.drive.peak_cur = self.value[0]
+
+    def read(self, typ):
+        peak_cur = self.drive.peak_cur
+        if peak_cur is not None:
+            self.value = (peak_cur,)
+        return super().read(typ)
+
+    def write(self, typ, value):
+        super().write(typ, value)
+        self.drive.peak_cur = self.value[0]
+
+class PosLimEnReg(WriteOnlyReg):
+
+    """Con Linear Drive PosLimEnReg register.
+
+    Non-zero writes activate range limits, writes of zero deactivate range limits.
+    """
+
+    def __init__(self, drive):
+        super().__init__(HarpTypes.U8)
+        self.drive = drive
+
+    def write(self, typ, value):
+        super().write(typ, value)
+        self.drive.range_lim = bool(self.value[0])
