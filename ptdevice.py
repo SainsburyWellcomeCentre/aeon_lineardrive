@@ -76,6 +76,7 @@ class PtDevice(HarpDevice):
         if self.registers[HarpDevice.R_OPERATION_CTRL].OP_MODE != OperationalCtrlReg.STANDBY_MODE:
 #            self.velocityEvent.enabled = True
             self.positionEvent.enabled = True
+#            self.positionEvent.enabled = False
         else:
 #            self.velocityEvent.enabled = False
             self.positionEvent.enabled = False

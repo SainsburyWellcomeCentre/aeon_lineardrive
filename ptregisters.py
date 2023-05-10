@@ -201,7 +201,7 @@ class PeakCurLimReg(ReadWriteReg):
         super().write(typ, value)
         self.drive.peak_cur = self.value[0]
 
-class PosLimEnReg(WriteOnlyReg):
+class PosLimEnReg(ReadWriteReg):
 
     """Con Linear Drive PosLimEnReg register.
 
@@ -212,6 +212,12 @@ class PosLimEnReg(WriteOnlyReg):
         super().__init__(HarpTypes.U8)
         self.drive = drive
 
+    def read(self, typ):
+        self.value = (int(self.drive.range_lim),)
+        return super().read(typ)
+
     def write(self, typ, value):
         super().write(typ, value)
-        self.drive.range_lim = bool(self.value[0])
+#        if self.value[0] > 0:
+#            self.value[0] = 1
+        self.drive.range_lim = self.value[0]

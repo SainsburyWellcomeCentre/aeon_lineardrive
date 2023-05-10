@@ -11,17 +11,17 @@ Additionally, the SWC microharp package must be present on the filesystem of the
 ## Harp register map
 | MessageType | Address | PayloadType | Payload | Description |
 | --- | --- | --- | --- | --- |
-| Write | 33 | S16 | vel | Set belt drive velocity, [-5000, 5000] TODO: units. |
-| Event | 34 | S16 | vel | Current belt drive velocity, [-5000, 5000] TODO: units. |
-| Write | 40 | U8 | ctl | Tilt mechanism control, 0 = disable, 1 = enable. |
-| Write | 41 | S32 | -ve, +ve | Tilt mechanism position limits, default -6100, 6100. |
-| Write | 42 | S32 | pos | Tilt mechanism home pos [-32768, 32767] TODO: units. |
-| Write | 43 | S32 | pos | Tilt mechanism goto pos [-32768, 32767] TODO: units. |
-| Event | 44 | S32 | pos | Tilt mechanism current pos [-32768, 32767] TODO: units. |
-| Write | 45 | U16 | spd | Tilt mechanism speed limit, default 2000. |
-| Write | 46 | U16 | ctl | Continuous current limit of drive, default 900. |
-| Write | 47 | U16 | ctl | Peak current limit of drive, default 900. |
-| Write | 48 | U8 | ctl | Position limit range control, 0 = disable, 1 = enable. |
+| Write | 33 | S16 | vel | Set Linear rail velocity, [-7583, 7583] TODO: units. |
+| Event | 34 | S16 | vel | Current Linear rail velocity, [-7583, 7583] TODO: units. |
+| Write | 40 | U8 | ctl | Linear rail control, 0 = disable, 1 = enable. |
+| Write | 41 | S32 | -ve, +ve | Linear rail position limits, default -1000, 160000. |
+| Write | 42 | S32 | pos | Linear rail home pos [-2147483648, 2147483647] TODO: units. |
+| Write | 43 | S32 | pos | Linear rail goto pos [-2147483648, 2147483647] TODO: units. |
+| Event | 44 | S32 | pos | Linear rail current pos [-2147483648, 2147483647] TODO: units. |
+| Write | 45 | U16 | spd | Linear rail speed limit, default 7583. |
+| Write | 46 | U16 | ctl | Linear rail Continuous current limit, default 900. |
+| Write | 47 | U16 | ctl | Linear rail Peak current limit, default 900. |
+| Write | 48 | U8 | ctl | Position range limit control, 0 = disable, 1 = enable. |
 
 ## Quick Start
 To control the position of the linear drive;
