@@ -225,9 +225,9 @@ namespace Harp.SwcLinearDrive
         /// A task that represents the asynchronous read operation. The <see cref="Task{TResult}.Result"/>
         /// property contains the register payload.
         /// </returns>
-        public async Task<short> ReadLimitSpeedAsync()
+        public async Task<ushort> ReadLimitSpeedAsync()
         {
-            var reply = await CommandAsync(HarpCommand.ReadInt16(LimitSpeed.Address));
+            var reply = await CommandAsync(HarpCommand.ReadUInt16(LimitSpeed.Address));
             return LimitSpeed.GetPayload(reply);
         }
 
@@ -238,9 +238,9 @@ namespace Harp.SwcLinearDrive
         /// A task that represents the asynchronous read operation. The <see cref="Task{TResult}.Result"/>
         /// property contains the timestamped register payload.
         /// </returns>
-        public async Task<Timestamped<short>> ReadTimestampedLimitSpeedAsync()
+        public async Task<Timestamped<ushort>> ReadTimestampedLimitSpeedAsync()
         {
-            var reply = await CommandAsync(HarpCommand.ReadInt16(LimitSpeed.Address));
+            var reply = await CommandAsync(HarpCommand.ReadUInt16(LimitSpeed.Address));
             return LimitSpeed.GetTimestampedPayload(reply);
         }
 
@@ -249,7 +249,7 @@ namespace Harp.SwcLinearDrive
         /// </summary>
         /// <param name="value">The value to be stored in the register.</param>
         /// <returns>The task object representing the asynchronous write operation.</returns>
-        public async Task WriteLimitSpeedAsync(short value)
+        public async Task WriteLimitSpeedAsync(ushort value)
         {
             var request = LimitSpeed.FromPayload(MessageType.Write, value);
             await CommandAsync(request);
@@ -325,9 +325,9 @@ namespace Harp.SwcLinearDrive
         /// A task that represents the asynchronous read operation. The <see cref="Task{TResult}.Result"/>
         /// property contains the register payload.
         /// </returns>
-        public async Task<short> ReadLimitContinuousCurrentAsync()
+        public async Task<ushort> ReadLimitContinuousCurrentAsync()
         {
-            var reply = await CommandAsync(HarpCommand.ReadInt16(LimitContinuousCurrent.Address));
+            var reply = await CommandAsync(HarpCommand.ReadUInt16(LimitContinuousCurrent.Address));
             return LimitContinuousCurrent.GetPayload(reply);
         }
 
@@ -338,9 +338,9 @@ namespace Harp.SwcLinearDrive
         /// A task that represents the asynchronous read operation. The <see cref="Task{TResult}.Result"/>
         /// property contains the timestamped register payload.
         /// </returns>
-        public async Task<Timestamped<short>> ReadTimestampedLimitContinuousCurrentAsync()
+        public async Task<Timestamped<ushort>> ReadTimestampedLimitContinuousCurrentAsync()
         {
-            var reply = await CommandAsync(HarpCommand.ReadInt16(LimitContinuousCurrent.Address));
+            var reply = await CommandAsync(HarpCommand.ReadUInt16(LimitContinuousCurrent.Address));
             return LimitContinuousCurrent.GetTimestampedPayload(reply);
         }
 
@@ -349,7 +349,7 @@ namespace Harp.SwcLinearDrive
         /// </summary>
         /// <param name="value">The value to be stored in the register.</param>
         /// <returns>The task object representing the asynchronous write operation.</returns>
-        public async Task WriteLimitContinuousCurrentAsync(short value)
+        public async Task WriteLimitContinuousCurrentAsync(ushort value)
         {
             var request = LimitContinuousCurrent.FromPayload(MessageType.Write, value);
             await CommandAsync(request);
@@ -362,9 +362,9 @@ namespace Harp.SwcLinearDrive
         /// A task that represents the asynchronous read operation. The <see cref="Task{TResult}.Result"/>
         /// property contains the register payload.
         /// </returns>
-        public async Task<short> ReadLimitPeakCurrentAsync()
+        public async Task<ushort> ReadLimitPeakCurrentAsync()
         {
-            var reply = await CommandAsync(HarpCommand.ReadInt16(LimitPeakCurrent.Address));
+            var reply = await CommandAsync(HarpCommand.ReadUInt16(LimitPeakCurrent.Address));
             return LimitPeakCurrent.GetPayload(reply);
         }
 
@@ -375,9 +375,9 @@ namespace Harp.SwcLinearDrive
         /// A task that represents the asynchronous read operation. The <see cref="Task{TResult}.Result"/>
         /// property contains the timestamped register payload.
         /// </returns>
-        public async Task<Timestamped<short>> ReadTimestampedLimitPeakCurrentAsync()
+        public async Task<Timestamped<ushort>> ReadTimestampedLimitPeakCurrentAsync()
         {
-            var reply = await CommandAsync(HarpCommand.ReadInt16(LimitPeakCurrent.Address));
+            var reply = await CommandAsync(HarpCommand.ReadUInt16(LimitPeakCurrent.Address));
             return LimitPeakCurrent.GetTimestampedPayload(reply);
         }
 
@@ -386,7 +386,7 @@ namespace Harp.SwcLinearDrive
         /// </summary>
         /// <param name="value">The value to be stored in the register.</param>
         /// <returns>The task object representing the asynchronous write operation.</returns>
-        public async Task WriteLimitPeakCurrentAsync(short value)
+        public async Task WriteLimitPeakCurrentAsync(ushort value)
         {
             var request = LimitPeakCurrent.FromPayload(MessageType.Write, value);
             await CommandAsync(request);
