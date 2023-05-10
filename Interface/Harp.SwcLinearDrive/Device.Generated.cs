@@ -719,7 +719,7 @@ namespace Harp.SwcLinearDrive
         /// <summary>
         /// Represents the payload type of the <see cref="LimitSpeed"/> register. This field is constant.
         /// </summary>
-        public const PayloadType RegisterType = PayloadType.S16;
+        public const PayloadType RegisterType = PayloadType.U16;
 
         /// <summary>
         /// Represents the length of the <see cref="LimitSpeed"/> register. This field is constant.
@@ -731,9 +731,9 @@ namespace Harp.SwcLinearDrive
         /// </summary>
         /// <param name="message">A <see cref="HarpMessage"/> object representing the register message.</param>
         /// <returns>A value representing the message payload.</returns>
-        public static short GetPayload(HarpMessage message)
+        public static ushort GetPayload(HarpMessage message)
         {
-            return message.GetPayloadInt16();
+            return message.GetPayloadUInt16();
         }
 
         /// <summary>
@@ -741,9 +741,9 @@ namespace Harp.SwcLinearDrive
         /// </summary>
         /// <param name="message">A <see cref="HarpMessage"/> object representing the register message.</param>
         /// <returns>A value representing the timestamped message payload.</returns>
-        public static Timestamped<short> GetTimestampedPayload(HarpMessage message)
+        public static Timestamped<ushort> GetTimestampedPayload(HarpMessage message)
         {
-            return message.GetTimestampedPayloadInt16();
+            return message.GetTimestampedPayloadUInt16();
         }
 
         /// <summary>
@@ -755,9 +755,9 @@ namespace Harp.SwcLinearDrive
         /// A <see cref="HarpMessage"/> object for the <see cref="LimitSpeed"/> register
         /// with the specified message type and payload.
         /// </returns>
-        public static HarpMessage FromPayload(MessageType messageType, short value)
+        public static HarpMessage FromPayload(MessageType messageType, ushort value)
         {
-            return HarpMessage.FromInt16(Address, messageType, value);
+            return HarpMessage.FromUInt16(Address, messageType, value);
         }
 
         /// <summary>
@@ -771,9 +771,9 @@ namespace Harp.SwcLinearDrive
         /// A <see cref="HarpMessage"/> object for the <see cref="LimitSpeed"/> register
         /// with the specified message type, timestamp, and payload.
         /// </returns>
-        public static HarpMessage FromPayload(double timestamp, MessageType messageType, short value)
+        public static HarpMessage FromPayload(double timestamp, MessageType messageType, ushort value)
         {
-            return HarpMessage.FromInt16(Address, timestamp, messageType, value);
+            return HarpMessage.FromUInt16(Address, timestamp, messageType, value);
         }
     }
 
@@ -795,7 +795,7 @@ namespace Harp.SwcLinearDrive
         /// </summary>
         /// <param name="message">A <see cref="HarpMessage"/> object representing the register message.</param>
         /// <returns>A value representing the timestamped message payload.</returns>
-        public static Timestamped<short> GetPayload(HarpMessage message)
+        public static Timestamped<ushort> GetPayload(HarpMessage message)
         {
             return LimitSpeed.GetTimestampedPayload(message);
         }
@@ -898,9 +898,9 @@ namespace Harp.SwcLinearDrive
     }
 
     /// <summary>
-    /// Represents a register that returns a periodic event with the current speed of the motor.
+    /// Represents a register that returns a periodic event with the current (mA) speed of the motor.
     /// </summary>
-    [Description("Returns a periodic event with the current speed of the motor.")]
+    [Description("Returns a periodic event with the current (mA) speed of the motor.")]
     public partial class Speed
     {
         /// <summary>
@@ -994,9 +994,9 @@ namespace Harp.SwcLinearDrive
     }
 
     /// <summary>
-    /// Represents a register that sets the maximum continuous current limit the drive is able to supply.
+    /// Represents a register that sets the maximum continuous current (mA) limit the drive is able to supply.
     /// </summary>
-    [Description("Sets the maximum continuous current limit the drive is able to supply.")]
+    [Description("Sets the maximum continuous current (mA) limit the drive is able to supply.")]
     public partial class LimitContinuousCurrent
     {
         /// <summary>
@@ -1007,7 +1007,7 @@ namespace Harp.SwcLinearDrive
         /// <summary>
         /// Represents the payload type of the <see cref="LimitContinuousCurrent"/> register. This field is constant.
         /// </summary>
-        public const PayloadType RegisterType = PayloadType.S16;
+        public const PayloadType RegisterType = PayloadType.U16;
 
         /// <summary>
         /// Represents the length of the <see cref="LimitContinuousCurrent"/> register. This field is constant.
@@ -1019,9 +1019,9 @@ namespace Harp.SwcLinearDrive
         /// </summary>
         /// <param name="message">A <see cref="HarpMessage"/> object representing the register message.</param>
         /// <returns>A value representing the message payload.</returns>
-        public static short GetPayload(HarpMessage message)
+        public static ushort GetPayload(HarpMessage message)
         {
-            return message.GetPayloadInt16();
+            return message.GetPayloadUInt16();
         }
 
         /// <summary>
@@ -1029,9 +1029,9 @@ namespace Harp.SwcLinearDrive
         /// </summary>
         /// <param name="message">A <see cref="HarpMessage"/> object representing the register message.</param>
         /// <returns>A value representing the timestamped message payload.</returns>
-        public static Timestamped<short> GetTimestampedPayload(HarpMessage message)
+        public static Timestamped<ushort> GetTimestampedPayload(HarpMessage message)
         {
-            return message.GetTimestampedPayloadInt16();
+            return message.GetTimestampedPayloadUInt16();
         }
 
         /// <summary>
@@ -1043,9 +1043,9 @@ namespace Harp.SwcLinearDrive
         /// A <see cref="HarpMessage"/> object for the <see cref="LimitContinuousCurrent"/> register
         /// with the specified message type and payload.
         /// </returns>
-        public static HarpMessage FromPayload(MessageType messageType, short value)
+        public static HarpMessage FromPayload(MessageType messageType, ushort value)
         {
-            return HarpMessage.FromInt16(Address, messageType, value);
+            return HarpMessage.FromUInt16(Address, messageType, value);
         }
 
         /// <summary>
@@ -1059,9 +1059,9 @@ namespace Harp.SwcLinearDrive
         /// A <see cref="HarpMessage"/> object for the <see cref="LimitContinuousCurrent"/> register
         /// with the specified message type, timestamp, and payload.
         /// </returns>
-        public static HarpMessage FromPayload(double timestamp, MessageType messageType, short value)
+        public static HarpMessage FromPayload(double timestamp, MessageType messageType, ushort value)
         {
-            return HarpMessage.FromInt16(Address, timestamp, messageType, value);
+            return HarpMessage.FromUInt16(Address, timestamp, messageType, value);
         }
     }
 
@@ -1083,7 +1083,7 @@ namespace Harp.SwcLinearDrive
         /// </summary>
         /// <param name="message">A <see cref="HarpMessage"/> object representing the register message.</param>
         /// <returns>A value representing the timestamped message payload.</returns>
-        public static Timestamped<short> GetPayload(HarpMessage message)
+        public static Timestamped<ushort> GetPayload(HarpMessage message)
         {
             return LimitContinuousCurrent.GetTimestampedPayload(message);
         }
@@ -1103,7 +1103,7 @@ namespace Harp.SwcLinearDrive
         /// <summary>
         /// Represents the payload type of the <see cref="LimitPeakCurrent"/> register. This field is constant.
         /// </summary>
-        public const PayloadType RegisterType = PayloadType.S16;
+        public const PayloadType RegisterType = PayloadType.U16;
 
         /// <summary>
         /// Represents the length of the <see cref="LimitPeakCurrent"/> register. This field is constant.
@@ -1115,9 +1115,9 @@ namespace Harp.SwcLinearDrive
         /// </summary>
         /// <param name="message">A <see cref="HarpMessage"/> object representing the register message.</param>
         /// <returns>A value representing the message payload.</returns>
-        public static short GetPayload(HarpMessage message)
+        public static ushort GetPayload(HarpMessage message)
         {
-            return message.GetPayloadInt16();
+            return message.GetPayloadUInt16();
         }
 
         /// <summary>
@@ -1125,9 +1125,9 @@ namespace Harp.SwcLinearDrive
         /// </summary>
         /// <param name="message">A <see cref="HarpMessage"/> object representing the register message.</param>
         /// <returns>A value representing the timestamped message payload.</returns>
-        public static Timestamped<short> GetTimestampedPayload(HarpMessage message)
+        public static Timestamped<ushort> GetTimestampedPayload(HarpMessage message)
         {
-            return message.GetTimestampedPayloadInt16();
+            return message.GetTimestampedPayloadUInt16();
         }
 
         /// <summary>
@@ -1139,9 +1139,9 @@ namespace Harp.SwcLinearDrive
         /// A <see cref="HarpMessage"/> object for the <see cref="LimitPeakCurrent"/> register
         /// with the specified message type and payload.
         /// </returns>
-        public static HarpMessage FromPayload(MessageType messageType, short value)
+        public static HarpMessage FromPayload(MessageType messageType, ushort value)
         {
-            return HarpMessage.FromInt16(Address, messageType, value);
+            return HarpMessage.FromUInt16(Address, messageType, value);
         }
 
         /// <summary>
@@ -1155,9 +1155,9 @@ namespace Harp.SwcLinearDrive
         /// A <see cref="HarpMessage"/> object for the <see cref="LimitPeakCurrent"/> register
         /// with the specified message type, timestamp, and payload.
         /// </returns>
-        public static HarpMessage FromPayload(double timestamp, MessageType messageType, short value)
+        public static HarpMessage FromPayload(double timestamp, MessageType messageType, ushort value)
         {
-            return HarpMessage.FromInt16(Address, timestamp, messageType, value);
+            return HarpMessage.FromUInt16(Address, timestamp, messageType, value);
         }
     }
 
@@ -1179,7 +1179,7 @@ namespace Harp.SwcLinearDrive
         /// </summary>
         /// <param name="message">A <see cref="HarpMessage"/> object representing the register message.</param>
         /// <returns>A value representing the timestamped message payload.</returns>
-        public static Timestamped<short> GetPayload(HarpMessage message)
+        public static Timestamped<ushort> GetPayload(HarpMessage message)
         {
             return LimitPeakCurrent.GetTimestampedPayload(message);
         }
@@ -1587,7 +1587,7 @@ namespace Harp.SwcLinearDrive
         /// Gets or sets the value that sets the maximum speed of the motor.
         /// </summary>
         [Description("The value that sets the maximum speed of the motor.")]
-        public short Value { get; set; } = 7583;
+        public ushort Value { get; set; } = 7583;
 
         /// <summary>
         /// Creates an observable sequence that contains a single message
@@ -1672,22 +1672,22 @@ namespace Harp.SwcLinearDrive
 
     /// <summary>
     /// Represents an operator that creates a sequence of message payloads
-    /// that returns a periodic event with the current speed of the motor.
+    /// that returns a periodic event with the current (mA) speed of the motor.
     /// </summary>
     [DisplayName("SpeedPayload")]
     [WorkflowElementCategory(ElementCategory.Transform)]
-    [Description("Creates a sequence of message payloads that returns a periodic event with the current speed of the motor.")]
+    [Description("Creates a sequence of message payloads that returns a periodic event with the current (mA) speed of the motor.")]
     public partial class CreateSpeedPayload : HarpCombinator
     {
         /// <summary>
-        /// Gets or sets the value that returns a periodic event with the current speed of the motor.
+        /// Gets or sets the value that returns a periodic event with the current (mA) speed of the motor.
         /// </summary>
-        [Description("The value that returns a periodic event with the current speed of the motor.")]
+        [Description("The value that returns a periodic event with the current (mA) speed of the motor.")]
         public short Value { get; set; }
 
         /// <summary>
         /// Creates an observable sequence that contains a single message
-        /// that returns a periodic event with the current speed of the motor.
+        /// that returns a periodic event with the current (mA) speed of the motor.
         /// </summary>
         /// <returns>
         /// A sequence containing a single <see cref="HarpMessage"/> object
@@ -1700,7 +1700,7 @@ namespace Harp.SwcLinearDrive
 
         /// <summary>
         /// Creates an observable sequence of message payloads
-        /// that returns a periodic event with the current speed of the motor.
+        /// that returns a periodic event with the current (mA) speed of the motor.
         /// </summary>
         /// <typeparam name="TSource">
         /// The type of the elements in the <paramref name="source"/> sequence.
@@ -1720,22 +1720,22 @@ namespace Harp.SwcLinearDrive
 
     /// <summary>
     /// Represents an operator that creates a sequence of message payloads
-    /// that sets the maximum continuous current limit the drive is able to supply.
+    /// that sets the maximum continuous current (mA) limit the drive is able to supply.
     /// </summary>
     [DisplayName("LimitContinuousCurrentPayload")]
     [WorkflowElementCategory(ElementCategory.Transform)]
-    [Description("Creates a sequence of message payloads that sets the maximum continuous current limit the drive is able to supply.")]
+    [Description("Creates a sequence of message payloads that sets the maximum continuous current (mA) limit the drive is able to supply.")]
     public partial class CreateLimitContinuousCurrentPayload : HarpCombinator
     {
         /// <summary>
-        /// Gets or sets the value that sets the maximum continuous current limit the drive is able to supply.
+        /// Gets or sets the value that sets the maximum continuous current (mA) limit the drive is able to supply.
         /// </summary>
-        [Description("The value that sets the maximum continuous current limit the drive is able to supply.")]
-        public short Value { get; set; } = 900;
+        [Description("The value that sets the maximum continuous current (mA) limit the drive is able to supply.")]
+        public ushort Value { get; set; } = 900;
 
         /// <summary>
         /// Creates an observable sequence that contains a single message
-        /// that sets the maximum continuous current limit the drive is able to supply.
+        /// that sets the maximum continuous current (mA) limit the drive is able to supply.
         /// </summary>
         /// <returns>
         /// A sequence containing a single <see cref="HarpMessage"/> object
@@ -1748,7 +1748,7 @@ namespace Harp.SwcLinearDrive
 
         /// <summary>
         /// Creates an observable sequence of message payloads
-        /// that sets the maximum continuous current limit the drive is able to supply.
+        /// that sets the maximum continuous current (mA) limit the drive is able to supply.
         /// </summary>
         /// <typeparam name="TSource">
         /// The type of the elements in the <paramref name="source"/> sequence.
@@ -1779,7 +1779,7 @@ namespace Harp.SwcLinearDrive
         /// Gets or sets the value that sets the maximum peak current limit the drive is able to supply.
         /// </summary>
         [Description("The value that sets the maximum peak current limit the drive is able to supply.")]
-        public short Value { get; set; } = 900;
+        public ushort Value { get; set; } = 900;
 
         /// <summary>
         /// Creates an observable sequence that contains a single message

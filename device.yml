@@ -45,7 +45,7 @@ registers:
   LimitSpeed:
     address: 45
     access: Write
-    type: S16
+    type: U16
     defaultValue: 7583
     description: Sets the maximum speed of the motor.
   SetSpeed:
@@ -57,17 +57,17 @@ registers:
     address: 34
     access: Event
     type: S16
-    description: Returns a periodic event with the current speed of the motor.
+    description: Returns a periodic event with the current (mA) speed of the motor.
   LimitContinuousCurrent:
     address: 46
     access: Write
-    type: S16
+    type: U16
     defaultValue: 900
-    description: Sets the maximum continuous current limit the drive is able to supply.
+    description: Sets the maximum continuous current (mA) limit the drive is able to supply.
   LimitPeakCurrent:
     address: 47
     access: Write
-    type: S16
+    type: U16
     defaultValue: 900
     description: Sets the maximum peak current limit the drive is able to supply.
   EnableLimitPosition:
