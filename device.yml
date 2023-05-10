@@ -6,7 +6,73 @@ whoAmI: 0000
 firmwareVersion: "0.1"
 hardwareTargets: "0.0"
 registers:
-  DigitalInputs:
-    address: 32
+  EnableMotorDriver:
+    address: 40
+    access: Write
     type: U8
+    maskType: EnableFlag
+    description: Enables the motor driver.
+  LimitPosition:
+    address: 41
+    access: Write
+    type: S32
+    length: 2
+    description: Configures the position limits of the motor.
+    payloadSpec:
+          Minimum:
+            offset: 0
+            defaultValue: -1000
+            description: The minimum allowed position of the motor
+          Maximum:
+            offset: 1
+            defaultValue: 160000
+            description: The maximum allowed position of the motor
+  HomePosition:
+    address: 42
+    access: Write
+    type: S32
+    description: Sets the home position of the motor.
+  SetPosition:
+    address: 43
+    access: Write
+    type: S32
+    description: Sets the current position of the motor. Reads return the last instruction.
+  Position:
+    address: 44
     access: Event
+    type: S32
+    description: Returns a periodic event with the current position of the motor.
+  LimitSpeed:
+    address: 45
+    access: Write
+    type: S16
+    defaultValue: 7583
+    description: Sets the maximum speed of the motor.
+  SetSpeed:
+    address: 33
+    access: Write
+    type: S16
+    description: Sets the current speed of the motor.
+  Speed:
+    address: 34
+    access: Event
+    type: S16
+    description: Returns a periodic event with the current speed of the motor.
+  LimitContinuousCurrent:
+    address: 46
+    access: Write
+    type: S16
+    defaultValue: 900
+    description: Sets the maximum continuous current limit the drive is able to supply.
+  LimitPeakCurrent:
+    address: 47
+    access: Write
+    type: S16
+    defaultValue: 900
+    description: Sets the maximum peak current limit the drive is able to supply.
+  EnableLimitPosition:
+    address: 48
+    access: Write
+    type: U8
+    maskType: EnableFlag
+    description: Enables the position limit.
