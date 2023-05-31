@@ -10,3 +10,4 @@ obj
 Debug
 packages
 *.componentinfo.xml
+local
