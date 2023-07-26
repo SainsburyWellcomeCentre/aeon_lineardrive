@@ -1,4 +1,4 @@
-# com-linear-drv
+# Aeon LinearDrive
 Commutator linear drive harp device.
 
 Provides control of the linear drive to control the position of the commutator from Bonsai.
