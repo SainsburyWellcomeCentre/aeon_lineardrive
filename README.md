@@ -19,8 +19,8 @@ Additionally, the SWC microharp package must be present on the filesystem of the
 | Write | 43 | S32 | pos | Linear rail goto pos [-2147483648, 2147483647] TODO: units. |
 | Event | 44 | S32 | pos | Linear rail current pos [-2147483648, 2147483647] TODO: units. |
 | Write | 45 | U16 | spd | Linear rail speed limit, default 7583. |
-| Write | 46 | U16 | ctl | Linear rail Continuous current limit, default 900. |
-| Write | 47 | U16 | ctl | Linear rail Peak current limit, default 900. |
+| Write | 46 | U16 | ctl | Linear rail Continuous current limit, default 900 (mA). |
+| Write | 47 | U16 | ctl | Linear rail Peak current limit, default 900 (mA). |
 | Write | 48 | U8 | ctl | Position range limit control, 0 = disable, 1 = enable. |
 
 ## Quick Start
