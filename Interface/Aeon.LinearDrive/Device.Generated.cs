@@ -1,4 +1,4 @@
-﻿using Bonsai;
+using Bonsai;
 using Bonsai.Harp;
 using System;
 using System.Collections.Generic;
@@ -99,12 +99,12 @@ namespace Aeon.LinearDrive
     [XmlInclude(typeof(LimitPeakCurrent))]
     [XmlInclude(typeof(EnableLimitPosition))]
     [Description("Filters register-specific messages reported by the LinearDrive device.")]
-    public class FilterMessage : FilterMessageBuilder, INamedElement
+    public class FilterRegister : FilterRegisterBuilder, INamedElement
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="FilterMessage"/> class.
+        /// Initializes a new instance of the <see cref="FilterRegister"/> class.
         /// </summary>
-        public FilterMessage()
+        public FilterRegister()
         {
             Register = new EnableMotorDriver();
         }
@@ -1308,6 +1308,17 @@ namespace Aeon.LinearDrive
     [XmlInclude(typeof(CreateLimitContinuousCurrentPayload))]
     [XmlInclude(typeof(CreateLimitPeakCurrentPayload))]
     [XmlInclude(typeof(CreateEnableLimitPositionPayload))]
+    [XmlInclude(typeof(CreateTimestampedEnableMotorDriverPayload))]
+    [XmlInclude(typeof(CreateTimestampedLimitPositionPayload))]
+    [XmlInclude(typeof(CreateTimestampedHomePositionPayload))]
+    [XmlInclude(typeof(CreateTimestampedSetPositionPayload))]
+    [XmlInclude(typeof(CreateTimestampedPositionPayload))]
+    [XmlInclude(typeof(CreateTimestampedLimitSpeedPayload))]
+    [XmlInclude(typeof(CreateTimestampedSetSpeedPayload))]
+    [XmlInclude(typeof(CreateTimestampedSpeedPayload))]
+    [XmlInclude(typeof(CreateTimestampedLimitContinuousCurrentPayload))]
+    [XmlInclude(typeof(CreateTimestampedLimitPeakCurrentPayload))]
+    [XmlInclude(typeof(CreateTimestampedEnableLimitPositionPayload))]
     [Description("Creates standard message payloads for the LinearDrive device.")]
     public partial class CreateMessage : CreateMessageBuilder, INamedElement
     {
@@ -1323,61 +1334,66 @@ namespace Aeon.LinearDrive
     }
 
     /// <summary>
-    /// Represents an operator that creates a sequence of message payloads
+    /// Represents an operator that creates a message payload
     /// that enables the motor driver.
     /// </summary>
     [DisplayName("EnableMotorDriverPayload")]
-    [WorkflowElementCategory(ElementCategory.Transform)]
-    [Description("Creates a sequence of message payloads that enables the motor driver.")]
-    public partial class CreateEnableMotorDriverPayload : HarpCombinator
+    [Description("Creates a message payload that enables the motor driver.")]
+    public partial class CreateEnableMotorDriverPayload
     {
         /// <summary>
         /// Gets or sets the value that enables the motor driver.
         /// </summary>
         [Description("The value that enables the motor driver.")]
-        public EnableFlag Value { get; set; }
+        public EnableFlag EnableMotorDriver { get; set; }
 
         /// <summary>
-        /// Creates an observable sequence that contains a single message
-        /// that enables the motor driver.
+        /// Creates a message payload for the EnableMotorDriver register.
         /// </summary>
-        /// <returns>
-        /// A sequence containing a single <see cref="HarpMessage"/> object
-        /// representing the created message payload.
-        /// </returns>
-        public IObservable<HarpMessage> Process()
+        /// <returns>The created message payload value.</returns>
+        public EnableFlag GetPayload()
         {
-            return Process(Observable.Return(System.Reactive.Unit.Default));
+            return EnableMotorDriver;
         }
 
         /// <summary>
-        /// Creates an observable sequence of message payloads
-        /// that enables the motor driver.
+        /// Creates a message that enables the motor driver.
         /// </summary>
-        /// <typeparam name="TSource">
-        /// The type of the elements in the <paramref name="source"/> sequence.
-        /// </typeparam>
-        /// <param name="source">
-        /// The sequence containing the notifications used for emitting message payloads.
-        /// </param>
-        /// <returns>
-        /// A sequence of <see cref="HarpMessage"/> objects representing each
-        /// created message payload.
-        /// </returns>
-        public IObservable<HarpMessage> Process<TSource>(IObservable<TSource> source)
+        /// <param name="messageType">Specifies the type of the created message.</param>
+        /// <returns>A new message for the EnableMotorDriver register.</returns>
+        public HarpMessage GetMessage(MessageType messageType)
         {
-            return source.Select(_ => EnableMotorDriver.FromPayload(MessageType, Value));
+            return Aeon.LinearDrive.EnableMotorDriver.FromPayload(messageType, GetPayload());
         }
     }
 
     /// <summary>
-    /// Represents an operator that creates a sequence of message payloads
+    /// Represents an operator that creates a timestamped message payload
+    /// that enables the motor driver.
+    /// </summary>
+    [DisplayName("TimestampedEnableMotorDriverPayload")]
+    [Description("Creates a timestamped message payload that enables the motor driver.")]
+    public partial class CreateTimestampedEnableMotorDriverPayload : CreateEnableMotorDriverPayload
+    {
+        /// <summary>
+        /// Creates a timestamped message that enables the motor driver.
+        /// </summary>
+        /// <param name="timestamp">The timestamp of the message payload, in seconds.</param>
+        /// <param name="messageType">Specifies the type of the created message.</param>
+        /// <returns>A new timestamped message for the EnableMotorDriver register.</returns>
+        public HarpMessage GetMessage(double timestamp, MessageType messageType)
+        {
+            return Aeon.LinearDrive.EnableMotorDriver.FromPayload(timestamp, messageType, GetPayload());
+        }
+    }
+
+    /// <summary>
+    /// Represents an operator that creates a message payload
     /// that configures the position limits of the motor.
     /// </summary>
     [DisplayName("LimitPositionPayload")]
-    [WorkflowElementCategory(ElementCategory.Transform)]
-    [Description("Creates a sequence of message payloads that configures the position limits of the motor.")]
-    public partial class CreateLimitPositionPayload : HarpCombinator
+    [Description("Creates a message payload that configures the position limits of the motor.")]
+    public partial class CreateLimitPositionPayload
     {
         /// <summary>
         /// Gets or sets a value that the minimum allowed position of the motor.
@@ -1392,473 +1408,531 @@ namespace Aeon.LinearDrive
         public int Maximum { get; set; } = 160000;
 
         /// <summary>
-        /// Creates an observable sequence that contains a single message
-        /// that configures the position limits of the motor.
+        /// Creates a message payload for the LimitPosition register.
         /// </summary>
-        /// <returns>
-        /// A sequence containing a single <see cref="HarpMessage"/> object
-        /// representing the created message payload.
-        /// </returns>
-        public IObservable<HarpMessage> Process()
+        /// <returns>The created message payload value.</returns>
+        public LimitPositionPayload GetPayload()
         {
-            return Process(Observable.Return(System.Reactive.Unit.Default));
+            LimitPositionPayload value;
+            value.Minimum = Minimum;
+            value.Maximum = Maximum;
+            return value;
         }
 
         /// <summary>
-        /// Creates an observable sequence of message payloads
-        /// that configures the position limits of the motor.
+        /// Creates a message that configures the position limits of the motor.
         /// </summary>
-        /// <typeparam name="TSource">
-        /// The type of the elements in the <paramref name="source"/> sequence.
-        /// </typeparam>
-        /// <param name="source">
-        /// The sequence containing the notifications used for emitting message payloads.
-        /// </param>
-        /// <returns>
-        /// A sequence of <see cref="HarpMessage"/> objects representing each
-        /// created message payload.
-        /// </returns>
-        public IObservable<HarpMessage> Process<TSource>(IObservable<TSource> source)
+        /// <param name="messageType">Specifies the type of the created message.</param>
+        /// <returns>A new message for the LimitPosition register.</returns>
+        public HarpMessage GetMessage(MessageType messageType)
         {
-            return source.Select(_ =>
-            {
-                LimitPositionPayload value;
-                value.Minimum = Minimum;
-                value.Maximum = Maximum;
-                return LimitPosition.FromPayload(MessageType, value);
-            });
+            return Aeon.LinearDrive.LimitPosition.FromPayload(messageType, GetPayload());
         }
     }
 
     /// <summary>
-    /// Represents an operator that creates a sequence of message payloads
+    /// Represents an operator that creates a timestamped message payload
+    /// that configures the position limits of the motor.
+    /// </summary>
+    [DisplayName("TimestampedLimitPositionPayload")]
+    [Description("Creates a timestamped message payload that configures the position limits of the motor.")]
+    public partial class CreateTimestampedLimitPositionPayload : CreateLimitPositionPayload
+    {
+        /// <summary>
+        /// Creates a timestamped message that configures the position limits of the motor.
+        /// </summary>
+        /// <param name="timestamp">The timestamp of the message payload, in seconds.</param>
+        /// <param name="messageType">Specifies the type of the created message.</param>
+        /// <returns>A new timestamped message for the LimitPosition register.</returns>
+        public HarpMessage GetMessage(double timestamp, MessageType messageType)
+        {
+            return Aeon.LinearDrive.LimitPosition.FromPayload(timestamp, messageType, GetPayload());
+        }
+    }
+
+    /// <summary>
+    /// Represents an operator that creates a message payload
     /// that sets the home position of the motor.
     /// </summary>
     [DisplayName("HomePositionPayload")]
-    [WorkflowElementCategory(ElementCategory.Transform)]
-    [Description("Creates a sequence of message payloads that sets the home position of the motor.")]
-    public partial class CreateHomePositionPayload : HarpCombinator
+    [Description("Creates a message payload that sets the home position of the motor.")]
+    public partial class CreateHomePositionPayload
     {
         /// <summary>
         /// Gets or sets the value that sets the home position of the motor.
         /// </summary>
         [Description("The value that sets the home position of the motor.")]
-        public int Value { get; set; }
+        public int HomePosition { get; set; }
 
         /// <summary>
-        /// Creates an observable sequence that contains a single message
-        /// that sets the home position of the motor.
+        /// Creates a message payload for the HomePosition register.
         /// </summary>
-        /// <returns>
-        /// A sequence containing a single <see cref="HarpMessage"/> object
-        /// representing the created message payload.
-        /// </returns>
-        public IObservable<HarpMessage> Process()
+        /// <returns>The created message payload value.</returns>
+        public int GetPayload()
         {
-            return Process(Observable.Return(System.Reactive.Unit.Default));
+            return HomePosition;
         }
 
         /// <summary>
-        /// Creates an observable sequence of message payloads
-        /// that sets the home position of the motor.
+        /// Creates a message that sets the home position of the motor.
         /// </summary>
-        /// <typeparam name="TSource">
-        /// The type of the elements in the <paramref name="source"/> sequence.
-        /// </typeparam>
-        /// <param name="source">
-        /// The sequence containing the notifications used for emitting message payloads.
-        /// </param>
-        /// <returns>
-        /// A sequence of <see cref="HarpMessage"/> objects representing each
-        /// created message payload.
-        /// </returns>
-        public IObservable<HarpMessage> Process<TSource>(IObservable<TSource> source)
+        /// <param name="messageType">Specifies the type of the created message.</param>
+        /// <returns>A new message for the HomePosition register.</returns>
+        public HarpMessage GetMessage(MessageType messageType)
         {
-            return source.Select(_ => HomePosition.FromPayload(MessageType, Value));
+            return Aeon.LinearDrive.HomePosition.FromPayload(messageType, GetPayload());
         }
     }
 
     /// <summary>
-    /// Represents an operator that creates a sequence of message payloads
+    /// Represents an operator that creates a timestamped message payload
+    /// that sets the home position of the motor.
+    /// </summary>
+    [DisplayName("TimestampedHomePositionPayload")]
+    [Description("Creates a timestamped message payload that sets the home position of the motor.")]
+    public partial class CreateTimestampedHomePositionPayload : CreateHomePositionPayload
+    {
+        /// <summary>
+        /// Creates a timestamped message that sets the home position of the motor.
+        /// </summary>
+        /// <param name="timestamp">The timestamp of the message payload, in seconds.</param>
+        /// <param name="messageType">Specifies the type of the created message.</param>
+        /// <returns>A new timestamped message for the HomePosition register.</returns>
+        public HarpMessage GetMessage(double timestamp, MessageType messageType)
+        {
+            return Aeon.LinearDrive.HomePosition.FromPayload(timestamp, messageType, GetPayload());
+        }
+    }
+
+    /// <summary>
+    /// Represents an operator that creates a message payload
     /// that sets the current position of the motor. Reads return the last instruction.
     /// </summary>
     [DisplayName("SetPositionPayload")]
-    [WorkflowElementCategory(ElementCategory.Transform)]
-    [Description("Creates a sequence of message payloads that sets the current position of the motor. Reads return the last instruction.")]
-    public partial class CreateSetPositionPayload : HarpCombinator
+    [Description("Creates a message payload that sets the current position of the motor. Reads return the last instruction.")]
+    public partial class CreateSetPositionPayload
     {
         /// <summary>
         /// Gets or sets the value that sets the current position of the motor. Reads return the last instruction.
         /// </summary>
         [Description("The value that sets the current position of the motor. Reads return the last instruction.")]
-        public int Value { get; set; }
+        public int SetPosition { get; set; }
 
         /// <summary>
-        /// Creates an observable sequence that contains a single message
-        /// that sets the current position of the motor. Reads return the last instruction.
+        /// Creates a message payload for the SetPosition register.
         /// </summary>
-        /// <returns>
-        /// A sequence containing a single <see cref="HarpMessage"/> object
-        /// representing the created message payload.
-        /// </returns>
-        public IObservable<HarpMessage> Process()
+        /// <returns>The created message payload value.</returns>
+        public int GetPayload()
         {
-            return Process(Observable.Return(System.Reactive.Unit.Default));
+            return SetPosition;
         }
 
         /// <summary>
-        /// Creates an observable sequence of message payloads
-        /// that sets the current position of the motor. Reads return the last instruction.
+        /// Creates a message that sets the current position of the motor. Reads return the last instruction.
         /// </summary>
-        /// <typeparam name="TSource">
-        /// The type of the elements in the <paramref name="source"/> sequence.
-        /// </typeparam>
-        /// <param name="source">
-        /// The sequence containing the notifications used for emitting message payloads.
-        /// </param>
-        /// <returns>
-        /// A sequence of <see cref="HarpMessage"/> objects representing each
-        /// created message payload.
-        /// </returns>
-        public IObservable<HarpMessage> Process<TSource>(IObservable<TSource> source)
+        /// <param name="messageType">Specifies the type of the created message.</param>
+        /// <returns>A new message for the SetPosition register.</returns>
+        public HarpMessage GetMessage(MessageType messageType)
         {
-            return source.Select(_ => SetPosition.FromPayload(MessageType, Value));
+            return Aeon.LinearDrive.SetPosition.FromPayload(messageType, GetPayload());
         }
     }
 
     /// <summary>
-    /// Represents an operator that creates a sequence of message payloads
+    /// Represents an operator that creates a timestamped message payload
+    /// that sets the current position of the motor. Reads return the last instruction.
+    /// </summary>
+    [DisplayName("TimestampedSetPositionPayload")]
+    [Description("Creates a timestamped message payload that sets the current position of the motor. Reads return the last instruction.")]
+    public partial class CreateTimestampedSetPositionPayload : CreateSetPositionPayload
+    {
+        /// <summary>
+        /// Creates a timestamped message that sets the current position of the motor. Reads return the last instruction.
+        /// </summary>
+        /// <param name="timestamp">The timestamp of the message payload, in seconds.</param>
+        /// <param name="messageType">Specifies the type of the created message.</param>
+        /// <returns>A new timestamped message for the SetPosition register.</returns>
+        public HarpMessage GetMessage(double timestamp, MessageType messageType)
+        {
+            return Aeon.LinearDrive.SetPosition.FromPayload(timestamp, messageType, GetPayload());
+        }
+    }
+
+    /// <summary>
+    /// Represents an operator that creates a message payload
     /// that returns a periodic event with the current position of the motor.
     /// </summary>
     [DisplayName("PositionPayload")]
-    [WorkflowElementCategory(ElementCategory.Transform)]
-    [Description("Creates a sequence of message payloads that returns a periodic event with the current position of the motor.")]
-    public partial class CreatePositionPayload : HarpCombinator
+    [Description("Creates a message payload that returns a periodic event with the current position of the motor.")]
+    public partial class CreatePositionPayload
     {
         /// <summary>
         /// Gets or sets the value that returns a periodic event with the current position of the motor.
         /// </summary>
         [Description("The value that returns a periodic event with the current position of the motor.")]
-        public int Value { get; set; }
+        public int Position { get; set; }
 
         /// <summary>
-        /// Creates an observable sequence that contains a single message
-        /// that returns a periodic event with the current position of the motor.
+        /// Creates a message payload for the Position register.
         /// </summary>
-        /// <returns>
-        /// A sequence containing a single <see cref="HarpMessage"/> object
-        /// representing the created message payload.
-        /// </returns>
-        public IObservable<HarpMessage> Process()
+        /// <returns>The created message payload value.</returns>
+        public int GetPayload()
         {
-            return Process(Observable.Return(System.Reactive.Unit.Default));
+            return Position;
         }
 
         /// <summary>
-        /// Creates an observable sequence of message payloads
-        /// that returns a periodic event with the current position of the motor.
+        /// Creates a message that returns a periodic event with the current position of the motor.
         /// </summary>
-        /// <typeparam name="TSource">
-        /// The type of the elements in the <paramref name="source"/> sequence.
-        /// </typeparam>
-        /// <param name="source">
-        /// The sequence containing the notifications used for emitting message payloads.
-        /// </param>
-        /// <returns>
-        /// A sequence of <see cref="HarpMessage"/> objects representing each
-        /// created message payload.
-        /// </returns>
-        public IObservable<HarpMessage> Process<TSource>(IObservable<TSource> source)
+        /// <param name="messageType">Specifies the type of the created message.</param>
+        /// <returns>A new message for the Position register.</returns>
+        public HarpMessage GetMessage(MessageType messageType)
         {
-            return source.Select(_ => Position.FromPayload(MessageType, Value));
+            return Aeon.LinearDrive.Position.FromPayload(messageType, GetPayload());
         }
     }
 
     /// <summary>
-    /// Represents an operator that creates a sequence of message payloads
+    /// Represents an operator that creates a timestamped message payload
+    /// that returns a periodic event with the current position of the motor.
+    /// </summary>
+    [DisplayName("TimestampedPositionPayload")]
+    [Description("Creates a timestamped message payload that returns a periodic event with the current position of the motor.")]
+    public partial class CreateTimestampedPositionPayload : CreatePositionPayload
+    {
+        /// <summary>
+        /// Creates a timestamped message that returns a periodic event with the current position of the motor.
+        /// </summary>
+        /// <param name="timestamp">The timestamp of the message payload, in seconds.</param>
+        /// <param name="messageType">Specifies the type of the created message.</param>
+        /// <returns>A new timestamped message for the Position register.</returns>
+        public HarpMessage GetMessage(double timestamp, MessageType messageType)
+        {
+            return Aeon.LinearDrive.Position.FromPayload(timestamp, messageType, GetPayload());
+        }
+    }
+
+    /// <summary>
+    /// Represents an operator that creates a message payload
     /// that sets the maximum speed of the motor.
     /// </summary>
     [DisplayName("LimitSpeedPayload")]
-    [WorkflowElementCategory(ElementCategory.Transform)]
-    [Description("Creates a sequence of message payloads that sets the maximum speed of the motor.")]
-    public partial class CreateLimitSpeedPayload : HarpCombinator
+    [Description("Creates a message payload that sets the maximum speed of the motor.")]
+    public partial class CreateLimitSpeedPayload
     {
         /// <summary>
         /// Gets or sets the value that sets the maximum speed of the motor.
         /// </summary>
         [Description("The value that sets the maximum speed of the motor.")]
-        public ushort Value { get; set; } = 7583;
+        public ushort LimitSpeed { get; set; } = 7583;
 
         /// <summary>
-        /// Creates an observable sequence that contains a single message
-        /// that sets the maximum speed of the motor.
+        /// Creates a message payload for the LimitSpeed register.
         /// </summary>
-        /// <returns>
-        /// A sequence containing a single <see cref="HarpMessage"/> object
-        /// representing the created message payload.
-        /// </returns>
-        public IObservable<HarpMessage> Process()
+        /// <returns>The created message payload value.</returns>
+        public ushort GetPayload()
         {
-            return Process(Observable.Return(System.Reactive.Unit.Default));
+            return LimitSpeed;
         }
 
         /// <summary>
-        /// Creates an observable sequence of message payloads
-        /// that sets the maximum speed of the motor.
+        /// Creates a message that sets the maximum speed of the motor.
         /// </summary>
-        /// <typeparam name="TSource">
-        /// The type of the elements in the <paramref name="source"/> sequence.
-        /// </typeparam>
-        /// <param name="source">
-        /// The sequence containing the notifications used for emitting message payloads.
-        /// </param>
-        /// <returns>
-        /// A sequence of <see cref="HarpMessage"/> objects representing each
-        /// created message payload.
-        /// </returns>
-        public IObservable<HarpMessage> Process<TSource>(IObservable<TSource> source)
+        /// <param name="messageType">Specifies the type of the created message.</param>
+        /// <returns>A new message for the LimitSpeed register.</returns>
+        public HarpMessage GetMessage(MessageType messageType)
         {
-            return source.Select(_ => LimitSpeed.FromPayload(MessageType, Value));
+            return Aeon.LinearDrive.LimitSpeed.FromPayload(messageType, GetPayload());
         }
     }
 
     /// <summary>
-    /// Represents an operator that creates a sequence of message payloads
+    /// Represents an operator that creates a timestamped message payload
+    /// that sets the maximum speed of the motor.
+    /// </summary>
+    [DisplayName("TimestampedLimitSpeedPayload")]
+    [Description("Creates a timestamped message payload that sets the maximum speed of the motor.")]
+    public partial class CreateTimestampedLimitSpeedPayload : CreateLimitSpeedPayload
+    {
+        /// <summary>
+        /// Creates a timestamped message that sets the maximum speed of the motor.
+        /// </summary>
+        /// <param name="timestamp">The timestamp of the message payload, in seconds.</param>
+        /// <param name="messageType">Specifies the type of the created message.</param>
+        /// <returns>A new timestamped message for the LimitSpeed register.</returns>
+        public HarpMessage GetMessage(double timestamp, MessageType messageType)
+        {
+            return Aeon.LinearDrive.LimitSpeed.FromPayload(timestamp, messageType, GetPayload());
+        }
+    }
+
+    /// <summary>
+    /// Represents an operator that creates a message payload
     /// that sets the current speed of the motor.
     /// </summary>
     [DisplayName("SetSpeedPayload")]
-    [WorkflowElementCategory(ElementCategory.Transform)]
-    [Description("Creates a sequence of message payloads that sets the current speed of the motor.")]
-    public partial class CreateSetSpeedPayload : HarpCombinator
+    [Description("Creates a message payload that sets the current speed of the motor.")]
+    public partial class CreateSetSpeedPayload
     {
         /// <summary>
         /// Gets or sets the value that sets the current speed of the motor.
         /// </summary>
         [Description("The value that sets the current speed of the motor.")]
-        public short Value { get; set; }
+        public short SetSpeed { get; set; }
 
         /// <summary>
-        /// Creates an observable sequence that contains a single message
-        /// that sets the current speed of the motor.
+        /// Creates a message payload for the SetSpeed register.
         /// </summary>
-        /// <returns>
-        /// A sequence containing a single <see cref="HarpMessage"/> object
-        /// representing the created message payload.
-        /// </returns>
-        public IObservable<HarpMessage> Process()
+        /// <returns>The created message payload value.</returns>
+        public short GetPayload()
         {
-            return Process(Observable.Return(System.Reactive.Unit.Default));
+            return SetSpeed;
         }
 
         /// <summary>
-        /// Creates an observable sequence of message payloads
-        /// that sets the current speed of the motor.
+        /// Creates a message that sets the current speed of the motor.
         /// </summary>
-        /// <typeparam name="TSource">
-        /// The type of the elements in the <paramref name="source"/> sequence.
-        /// </typeparam>
-        /// <param name="source">
-        /// The sequence containing the notifications used for emitting message payloads.
-        /// </param>
-        /// <returns>
-        /// A sequence of <see cref="HarpMessage"/> objects representing each
-        /// created message payload.
-        /// </returns>
-        public IObservable<HarpMessage> Process<TSource>(IObservable<TSource> source)
+        /// <param name="messageType">Specifies the type of the created message.</param>
+        /// <returns>A new message for the SetSpeed register.</returns>
+        public HarpMessage GetMessage(MessageType messageType)
         {
-            return source.Select(_ => SetSpeed.FromPayload(MessageType, Value));
+            return Aeon.LinearDrive.SetSpeed.FromPayload(messageType, GetPayload());
         }
     }
 
     /// <summary>
-    /// Represents an operator that creates a sequence of message payloads
+    /// Represents an operator that creates a timestamped message payload
+    /// that sets the current speed of the motor.
+    /// </summary>
+    [DisplayName("TimestampedSetSpeedPayload")]
+    [Description("Creates a timestamped message payload that sets the current speed of the motor.")]
+    public partial class CreateTimestampedSetSpeedPayload : CreateSetSpeedPayload
+    {
+        /// <summary>
+        /// Creates a timestamped message that sets the current speed of the motor.
+        /// </summary>
+        /// <param name="timestamp">The timestamp of the message payload, in seconds.</param>
+        /// <param name="messageType">Specifies the type of the created message.</param>
+        /// <returns>A new timestamped message for the SetSpeed register.</returns>
+        public HarpMessage GetMessage(double timestamp, MessageType messageType)
+        {
+            return Aeon.LinearDrive.SetSpeed.FromPayload(timestamp, messageType, GetPayload());
+        }
+    }
+
+    /// <summary>
+    /// Represents an operator that creates a message payload
     /// that returns a periodic event with the current (mA) speed of the motor.
     /// </summary>
     [DisplayName("SpeedPayload")]
-    [WorkflowElementCategory(ElementCategory.Transform)]
-    [Description("Creates a sequence of message payloads that returns a periodic event with the current (mA) speed of the motor.")]
-    public partial class CreateSpeedPayload : HarpCombinator
+    [Description("Creates a message payload that returns a periodic event with the current (mA) speed of the motor.")]
+    public partial class CreateSpeedPayload
     {
         /// <summary>
         /// Gets or sets the value that returns a periodic event with the current (mA) speed of the motor.
         /// </summary>
         [Description("The value that returns a periodic event with the current (mA) speed of the motor.")]
-        public short Value { get; set; }
+        public short Speed { get; set; }
 
         /// <summary>
-        /// Creates an observable sequence that contains a single message
-        /// that returns a periodic event with the current (mA) speed of the motor.
+        /// Creates a message payload for the Speed register.
         /// </summary>
-        /// <returns>
-        /// A sequence containing a single <see cref="HarpMessage"/> object
-        /// representing the created message payload.
-        /// </returns>
-        public IObservable<HarpMessage> Process()
+        /// <returns>The created message payload value.</returns>
+        public short GetPayload()
         {
-            return Process(Observable.Return(System.Reactive.Unit.Default));
+            return Speed;
         }
 
         /// <summary>
-        /// Creates an observable sequence of message payloads
-        /// that returns a periodic event with the current (mA) speed of the motor.
+        /// Creates a message that returns a periodic event with the current (mA) speed of the motor.
         /// </summary>
-        /// <typeparam name="TSource">
-        /// The type of the elements in the <paramref name="source"/> sequence.
-        /// </typeparam>
-        /// <param name="source">
-        /// The sequence containing the notifications used for emitting message payloads.
-        /// </param>
-        /// <returns>
-        /// A sequence of <see cref="HarpMessage"/> objects representing each
-        /// created message payload.
-        /// </returns>
-        public IObservable<HarpMessage> Process<TSource>(IObservable<TSource> source)
+        /// <param name="messageType">Specifies the type of the created message.</param>
+        /// <returns>A new message for the Speed register.</returns>
+        public HarpMessage GetMessage(MessageType messageType)
         {
-            return source.Select(_ => Speed.FromPayload(MessageType, Value));
+            return Aeon.LinearDrive.Speed.FromPayload(messageType, GetPayload());
         }
     }
 
     /// <summary>
-    /// Represents an operator that creates a sequence of message payloads
+    /// Represents an operator that creates a timestamped message payload
+    /// that returns a periodic event with the current (mA) speed of the motor.
+    /// </summary>
+    [DisplayName("TimestampedSpeedPayload")]
+    [Description("Creates a timestamped message payload that returns a periodic event with the current (mA) speed of the motor.")]
+    public partial class CreateTimestampedSpeedPayload : CreateSpeedPayload
+    {
+        /// <summary>
+        /// Creates a timestamped message that returns a periodic event with the current (mA) speed of the motor.
+        /// </summary>
+        /// <param name="timestamp">The timestamp of the message payload, in seconds.</param>
+        /// <param name="messageType">Specifies the type of the created message.</param>
+        /// <returns>A new timestamped message for the Speed register.</returns>
+        public HarpMessage GetMessage(double timestamp, MessageType messageType)
+        {
+            return Aeon.LinearDrive.Speed.FromPayload(timestamp, messageType, GetPayload());
+        }
+    }
+
+    /// <summary>
+    /// Represents an operator that creates a message payload
     /// that sets the maximum continuous current (mA) limit the drive is able to supply.
     /// </summary>
     [DisplayName("LimitContinuousCurrentPayload")]
-    [WorkflowElementCategory(ElementCategory.Transform)]
-    [Description("Creates a sequence of message payloads that sets the maximum continuous current (mA) limit the drive is able to supply.")]
-    public partial class CreateLimitContinuousCurrentPayload : HarpCombinator
+    [Description("Creates a message payload that sets the maximum continuous current (mA) limit the drive is able to supply.")]
+    public partial class CreateLimitContinuousCurrentPayload
     {
         /// <summary>
         /// Gets or sets the value that sets the maximum continuous current (mA) limit the drive is able to supply.
         /// </summary>
         [Description("The value that sets the maximum continuous current (mA) limit the drive is able to supply.")]
-        public ushort Value { get; set; } = 900;
+        public ushort LimitContinuousCurrent { get; set; } = 900;
 
         /// <summary>
-        /// Creates an observable sequence that contains a single message
-        /// that sets the maximum continuous current (mA) limit the drive is able to supply.
+        /// Creates a message payload for the LimitContinuousCurrent register.
         /// </summary>
-        /// <returns>
-        /// A sequence containing a single <see cref="HarpMessage"/> object
-        /// representing the created message payload.
-        /// </returns>
-        public IObservable<HarpMessage> Process()
+        /// <returns>The created message payload value.</returns>
+        public ushort GetPayload()
         {
-            return Process(Observable.Return(System.Reactive.Unit.Default));
+            return LimitContinuousCurrent;
         }
 
         /// <summary>
-        /// Creates an observable sequence of message payloads
-        /// that sets the maximum continuous current (mA) limit the drive is able to supply.
+        /// Creates a message that sets the maximum continuous current (mA) limit the drive is able to supply.
         /// </summary>
-        /// <typeparam name="TSource">
-        /// The type of the elements in the <paramref name="source"/> sequence.
-        /// </typeparam>
-        /// <param name="source">
-        /// The sequence containing the notifications used for emitting message payloads.
-        /// </param>
-        /// <returns>
-        /// A sequence of <see cref="HarpMessage"/> objects representing each
-        /// created message payload.
-        /// </returns>
-        public IObservable<HarpMessage> Process<TSource>(IObservable<TSource> source)
+        /// <param name="messageType">Specifies the type of the created message.</param>
+        /// <returns>A new message for the LimitContinuousCurrent register.</returns>
+        public HarpMessage GetMessage(MessageType messageType)
         {
-            return source.Select(_ => LimitContinuousCurrent.FromPayload(MessageType, Value));
+            return Aeon.LinearDrive.LimitContinuousCurrent.FromPayload(messageType, GetPayload());
         }
     }
 
     /// <summary>
-    /// Represents an operator that creates a sequence of message payloads
+    /// Represents an operator that creates a timestamped message payload
+    /// that sets the maximum continuous current (mA) limit the drive is able to supply.
+    /// </summary>
+    [DisplayName("TimestampedLimitContinuousCurrentPayload")]
+    [Description("Creates a timestamped message payload that sets the maximum continuous current (mA) limit the drive is able to supply.")]
+    public partial class CreateTimestampedLimitContinuousCurrentPayload : CreateLimitContinuousCurrentPayload
+    {
+        /// <summary>
+        /// Creates a timestamped message that sets the maximum continuous current (mA) limit the drive is able to supply.
+        /// </summary>
+        /// <param name="timestamp">The timestamp of the message payload, in seconds.</param>
+        /// <param name="messageType">Specifies the type of the created message.</param>
+        /// <returns>A new timestamped message for the LimitContinuousCurrent register.</returns>
+        public HarpMessage GetMessage(double timestamp, MessageType messageType)
+        {
+            return Aeon.LinearDrive.LimitContinuousCurrent.FromPayload(timestamp, messageType, GetPayload());
+        }
+    }
+
+    /// <summary>
+    /// Represents an operator that creates a message payload
     /// that sets the maximum peak current limit the drive is able to supply.
     /// </summary>
     [DisplayName("LimitPeakCurrentPayload")]
-    [WorkflowElementCategory(ElementCategory.Transform)]
-    [Description("Creates a sequence of message payloads that sets the maximum peak current limit the drive is able to supply.")]
-    public partial class CreateLimitPeakCurrentPayload : HarpCombinator
+    [Description("Creates a message payload that sets the maximum peak current limit the drive is able to supply.")]
+    public partial class CreateLimitPeakCurrentPayload
     {
         /// <summary>
         /// Gets or sets the value that sets the maximum peak current limit the drive is able to supply.
         /// </summary>
         [Description("The value that sets the maximum peak current limit the drive is able to supply.")]
-        public ushort Value { get; set; } = 900;
+        public ushort LimitPeakCurrent { get; set; } = 900;
 
         /// <summary>
-        /// Creates an observable sequence that contains a single message
-        /// that sets the maximum peak current limit the drive is able to supply.
+        /// Creates a message payload for the LimitPeakCurrent register.
         /// </summary>
-        /// <returns>
-        /// A sequence containing a single <see cref="HarpMessage"/> object
-        /// representing the created message payload.
-        /// </returns>
-        public IObservable<HarpMessage> Process()
+        /// <returns>The created message payload value.</returns>
+        public ushort GetPayload()
         {
-            return Process(Observable.Return(System.Reactive.Unit.Default));
+            return LimitPeakCurrent;
         }
 
         /// <summary>
-        /// Creates an observable sequence of message payloads
-        /// that sets the maximum peak current limit the drive is able to supply.
+        /// Creates a message that sets the maximum peak current limit the drive is able to supply.
         /// </summary>
-        /// <typeparam name="TSource">
-        /// The type of the elements in the <paramref name="source"/> sequence.
-        /// </typeparam>
-        /// <param name="source">
-        /// The sequence containing the notifications used for emitting message payloads.
-        /// </param>
-        /// <returns>
-        /// A sequence of <see cref="HarpMessage"/> objects representing each
-        /// created message payload.
-        /// </returns>
-        public IObservable<HarpMessage> Process<TSource>(IObservable<TSource> source)
+        /// <param name="messageType">Specifies the type of the created message.</param>
+        /// <returns>A new message for the LimitPeakCurrent register.</returns>
+        public HarpMessage GetMessage(MessageType messageType)
         {
-            return source.Select(_ => LimitPeakCurrent.FromPayload(MessageType, Value));
+            return Aeon.LinearDrive.LimitPeakCurrent.FromPayload(messageType, GetPayload());
         }
     }
 
     /// <summary>
-    /// Represents an operator that creates a sequence of message payloads
+    /// Represents an operator that creates a timestamped message payload
+    /// that sets the maximum peak current limit the drive is able to supply.
+    /// </summary>
+    [DisplayName("TimestampedLimitPeakCurrentPayload")]
+    [Description("Creates a timestamped message payload that sets the maximum peak current limit the drive is able to supply.")]
+    public partial class CreateTimestampedLimitPeakCurrentPayload : CreateLimitPeakCurrentPayload
+    {
+        /// <summary>
+        /// Creates a timestamped message that sets the maximum peak current limit the drive is able to supply.
+        /// </summary>
+        /// <param name="timestamp">The timestamp of the message payload, in seconds.</param>
+        /// <param name="messageType">Specifies the type of the created message.</param>
+        /// <returns>A new timestamped message for the LimitPeakCurrent register.</returns>
+        public HarpMessage GetMessage(double timestamp, MessageType messageType)
+        {
+            return Aeon.LinearDrive.LimitPeakCurrent.FromPayload(timestamp, messageType, GetPayload());
+        }
+    }
+
+    /// <summary>
+    /// Represents an operator that creates a message payload
     /// that enables the position limit.
     /// </summary>
     [DisplayName("EnableLimitPositionPayload")]
-    [WorkflowElementCategory(ElementCategory.Transform)]
-    [Description("Creates a sequence of message payloads that enables the position limit.")]
-    public partial class CreateEnableLimitPositionPayload : HarpCombinator
+    [Description("Creates a message payload that enables the position limit.")]
+    public partial class CreateEnableLimitPositionPayload
     {
         /// <summary>
         /// Gets or sets the value that enables the position limit.
         /// </summary>
         [Description("The value that enables the position limit.")]
-        public EnableFlag Value { get; set; }
+        public EnableFlag EnableLimitPosition { get; set; }
 
         /// <summary>
-        /// Creates an observable sequence that contains a single message
-        /// that enables the position limit.
+        /// Creates a message payload for the EnableLimitPosition register.
         /// </summary>
-        /// <returns>
-        /// A sequence containing a single <see cref="HarpMessage"/> object
-        /// representing the created message payload.
-        /// </returns>
-        public IObservable<HarpMessage> Process()
+        /// <returns>The created message payload value.</returns>
+        public EnableFlag GetPayload()
         {
-            return Process(Observable.Return(System.Reactive.Unit.Default));
+            return EnableLimitPosition;
         }
 
         /// <summary>
-        /// Creates an observable sequence of message payloads
-        /// that enables the position limit.
+        /// Creates a message that enables the position limit.
         /// </summary>
-        /// <typeparam name="TSource">
-        /// The type of the elements in the <paramref name="source"/> sequence.
-        /// </typeparam>
-        /// <param name="source">
-        /// The sequence containing the notifications used for emitting message payloads.
-        /// </param>
-        /// <returns>
-        /// A sequence of <see cref="HarpMessage"/> objects representing each
-        /// created message payload.
-        /// </returns>
-        public IObservable<HarpMessage> Process<TSource>(IObservable<TSource> source)
+        /// <param name="messageType">Specifies the type of the created message.</param>
+        /// <returns>A new message for the EnableLimitPosition register.</returns>
+        public HarpMessage GetMessage(MessageType messageType)
         {
-            return source.Select(_ => EnableLimitPosition.FromPayload(MessageType, Value));
+            return Aeon.LinearDrive.EnableLimitPosition.FromPayload(messageType, GetPayload());
+        }
+    }
+
+    /// <summary>
+    /// Represents an operator that creates a timestamped message payload
+    /// that enables the position limit.
+    /// </summary>
+    [DisplayName("TimestampedEnableLimitPositionPayload")]
+    [Description("Creates a timestamped message payload that enables the position limit.")]
+    public partial class CreateTimestampedEnableLimitPositionPayload : CreateEnableLimitPositionPayload
+    {
+        /// <summary>
+        /// Creates a timestamped message that enables the position limit.
+        /// </summary>
+        /// <param name="timestamp">The timestamp of the message payload, in seconds.</param>
+        /// <param name="messageType">Specifies the type of the created message.</param>
+        /// <returns>A new timestamped message for the EnableLimitPosition register.</returns>
+        public HarpMessage GetMessage(double timestamp, MessageType messageType)
+        {
+            return Aeon.LinearDrive.EnableLimitPosition.FromPayload(timestamp, messageType, GetPayload());
         }
     }
 
