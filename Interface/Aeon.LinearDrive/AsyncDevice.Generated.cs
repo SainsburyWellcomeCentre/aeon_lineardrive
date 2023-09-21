@@ -1,14 +1,14 @@
-using Bonsai.Harp;
+﻿using Bonsai.Harp;
 using System.Threading.Tasks;
 
-namespace Harp.SwcLinearDrive
+namespace Aeon.LinearDrive
 {
     /// <inheritdoc/>
     public partial class Device
     {
         /// <summary>
         /// Initializes a new instance of the asynchronous API to configure and interface
-        /// with SwcLinearDrive devices on the specified serial port.
+        /// with LinearDrive devices on the specified serial port.
         /// </summary>
         /// <param name="portName">
         /// The name of the serial port used to communicate with the Harp device.
@@ -25,7 +25,7 @@ namespace Harp.SwcLinearDrive
             if (whoAmI != Device.WhoAmI)
             {
                 var errorMessage = string.Format(
-                    "The device ID {1} on {0} was unexpected. Check whether a SwcLinearDrive device is connected to the specified serial port.",
+                    "The device ID {1} on {0} was unexpected. Check whether a LinearDrive device is connected to the specified serial port.",
                     portName, whoAmI);
                 throw new HarpException(errorMessage);
             }
@@ -35,7 +35,7 @@ namespace Harp.SwcLinearDrive
     }
 
     /// <summary>
-    /// Represents an asynchronous API to configure and interface with SwcLinearDrive devices.
+    /// Represents an asynchronous API to configure and interface with LinearDrive devices.
     /// </summary>
     public partial class AsyncDevice : Bonsai.Harp.AsyncDevice
     {

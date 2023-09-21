@@ -1,4 +1,4 @@
-using Bonsai;
+﻿using Bonsai;
 using Bonsai.Harp;
 using System;
 using System.Collections.Generic;
@@ -7,19 +7,19 @@ using System.Linq;
 using System.Reactive.Linq;
 using System.Xml.Serialization;
 
-namespace Harp.SwcLinearDrive
+namespace Aeon.LinearDrive
 {
     /// <summary>
-    /// Generates events and processes commands for the SwcLinearDrive device connected
+    /// Generates events and processes commands for the LinearDrive device connected
     /// at the specified serial port.
     /// </summary>
     [Combinator(MethodName = nameof(Generate))]
     [WorkflowElementCategory(ElementCategory.Source)]
-    [Description("Generates events and processes commands for the SwcLinearDrive device.")]
+    [Description("Generates events and processes commands for the LinearDrive device.")]
     public partial class Device : Bonsai.Harp.Device, INamedElement
     {
         /// <summary>
-        /// Represents the unique identity class of the <see cref="SwcLinearDrive"/> device.
+        /// Represents the unique identity class of the <see cref="LinearDrive"/> device.
         /// This field is constant.
         /// </summary>
         public const int WhoAmI = 0;
@@ -29,7 +29,7 @@ namespace Harp.SwcLinearDrive
         /// </summary>
         public Device() : base(WhoAmI) { }
 
-        string INamedElement.Name => nameof(SwcLinearDrive);
+        string INamedElement.Name => nameof(LinearDrive);
 
         /// <summary>
         /// Gets a read-only mapping from address to register type.
@@ -52,19 +52,19 @@ namespace Harp.SwcLinearDrive
     }
 
     /// <summary>
-    /// Represents an operator that groups the sequence of <see cref="SwcLinearDrive"/>" messages by register type.
+    /// Represents an operator that groups the sequence of <see cref="LinearDrive"/>" messages by register type.
     /// </summary>
-    [Description("Groups the sequence of SwcLinearDrive messages by register type.")]
+    [Description("Groups the sequence of LinearDrive messages by register type.")]
     public partial class GroupByRegister : Combinator<HarpMessage, IGroupedObservable<Type, HarpMessage>>
     {
         /// <summary>
-        /// Groups an observable sequence of <see cref="SwcLinearDrive"/> messages
+        /// Groups an observable sequence of <see cref="LinearDrive"/> messages
         /// by register type.
         /// </summary>
         /// <param name="source">The sequence of Harp device messages.</param>
         /// <returns>
         /// A sequence of observable groups, each of which corresponds to a unique
-        /// <see cref="SwcLinearDrive"/> register.
+        /// <see cref="LinearDrive"/> register.
         /// </returns>
         public override IObservable<IGroupedObservable<Type, HarpMessage>> Process(IObservable<HarpMessage> source)
         {
@@ -74,7 +74,7 @@ namespace Harp.SwcLinearDrive
 
     /// <summary>
     /// Represents an operator that filters register-specific messages
-    /// reported by the <see cref="SwcLinearDrive"/> device.
+    /// reported by the <see cref="LinearDrive"/> device.
     /// </summary>
     /// <seealso cref="EnableMotorDriver"/>
     /// <seealso cref="LimitPosition"/>
@@ -98,7 +98,7 @@ namespace Harp.SwcLinearDrive
     [XmlInclude(typeof(LimitContinuousCurrent))]
     [XmlInclude(typeof(LimitPeakCurrent))]
     [XmlInclude(typeof(EnableLimitPosition))]
-    [Description("Filters register-specific messages reported by the SwcLinearDrive device.")]
+    [Description("Filters register-specific messages reported by the LinearDrive device.")]
     public class FilterMessage : FilterMessageBuilder, INamedElement
     {
         /// <summary>
@@ -111,13 +111,13 @@ namespace Harp.SwcLinearDrive
 
         string INamedElement.Name
         {
-            get => $"{nameof(SwcLinearDrive)}.{GetElementDisplayName(Register)}";
+            get => $"{nameof(LinearDrive)}.{GetElementDisplayName(Register)}";
         }
     }
 
     /// <summary>
     /// Represents an operator which filters and selects specific messages
-    /// reported by the SwcLinearDrive device.
+    /// reported by the LinearDrive device.
     /// </summary>
     /// <seealso cref="EnableMotorDriver"/>
     /// <seealso cref="LimitPosition"/>
@@ -152,7 +152,7 @@ namespace Harp.SwcLinearDrive
     [XmlInclude(typeof(TimestampedLimitContinuousCurrent))]
     [XmlInclude(typeof(TimestampedLimitPeakCurrent))]
     [XmlInclude(typeof(TimestampedEnableLimitPosition))]
-    [Description("Filters and selects specific messages reported by the SwcLinearDrive device.")]
+    [Description("Filters and selects specific messages reported by the LinearDrive device.")]
     public partial class Parse : ParseBuilder, INamedElement
     {
         /// <summary>
@@ -163,12 +163,12 @@ namespace Harp.SwcLinearDrive
             Register = new EnableMotorDriver();
         }
 
-        string INamedElement.Name => $"{nameof(SwcLinearDrive)}.{GetElementDisplayName(Register)}";
+        string INamedElement.Name => $"{nameof(LinearDrive)}.{GetElementDisplayName(Register)}";
     }
 
     /// <summary>
     /// Represents an operator which formats a sequence of values as specific
-    /// SwcLinearDrive register messages.
+    /// LinearDrive register messages.
     /// </summary>
     /// <seealso cref="EnableMotorDriver"/>
     /// <seealso cref="LimitPosition"/>
@@ -192,7 +192,7 @@ namespace Harp.SwcLinearDrive
     [XmlInclude(typeof(LimitContinuousCurrent))]
     [XmlInclude(typeof(LimitPeakCurrent))]
     [XmlInclude(typeof(EnableLimitPosition))]
-    [Description("Formats a sequence of values as specific SwcLinearDrive register messages.")]
+    [Description("Formats a sequence of values as specific LinearDrive register messages.")]
     public partial class Format : FormatBuilder, INamedElement
     {
         /// <summary>
@@ -203,7 +203,7 @@ namespace Harp.SwcLinearDrive
             Register = new EnableMotorDriver();
         }
 
-        string INamedElement.Name => $"{nameof(SwcLinearDrive)}.{GetElementDisplayName(Register)}";
+        string INamedElement.Name => $"{nameof(LinearDrive)}.{GetElementDisplayName(Register)}";
     }
 
     /// <summary>
@@ -1284,7 +1284,7 @@ namespace Harp.SwcLinearDrive
 
     /// <summary>
     /// Represents an operator which creates standard message payloads for the
-    /// SwcLinearDrive device.
+    /// LinearDrive device.
     /// </summary>
     /// <seealso cref="CreateEnableMotorDriverPayload"/>
     /// <seealso cref="CreateLimitPositionPayload"/>
@@ -1308,7 +1308,7 @@ namespace Harp.SwcLinearDrive
     [XmlInclude(typeof(CreateLimitContinuousCurrentPayload))]
     [XmlInclude(typeof(CreateLimitPeakCurrentPayload))]
     [XmlInclude(typeof(CreateEnableLimitPositionPayload))]
-    [Description("Creates standard message payloads for the SwcLinearDrive device.")]
+    [Description("Creates standard message payloads for the LinearDrive device.")]
     public partial class CreateMessage : CreateMessageBuilder, INamedElement
     {
         /// <summary>
@@ -1319,7 +1319,7 @@ namespace Harp.SwcLinearDrive
             Payload = new CreateEnableMotorDriverPayload();
         }
 
-        string INamedElement.Name => $"{nameof(SwcLinearDrive)}.{GetElementDisplayName(Payload)}";
+        string INamedElement.Name => $"{nameof(LinearDrive)}.{GetElementDisplayName(Payload)}";
     }
 
     /// <summary>

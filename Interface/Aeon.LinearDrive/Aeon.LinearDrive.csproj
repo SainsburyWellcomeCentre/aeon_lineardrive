@@ -1,21 +1,21 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <Title>Harp.SwcLinearDrive</Title>
+    <Title>Aeon.LinearDrive</Title>
     <Authors></Authors>
     <Copyright>Copyright ©  2023</Copyright>
     <IncludeSymbols>true</IncludeSymbols>
     <SymbolPackageFormat>snupkg</SymbolPackageFormat>
     <GeneratePackageOnBuild Condition="'$(Configuration)'=='Release'">true</GeneratePackageOnBuild>
-    <Description>Bonsai Library containing interfaces for data acquisition and control of Harp.SwcLinearDrive devices.</Description>
+    <Description>Bonsai Library containing interfaces for data acquisition and control of LinearDrive devices.</Description>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
-    <PackageTags>Harp SwcLinearDrive Bonsai Rx</PackageTags>
+    <PackageTags>Aeon LinearDrive Bonsai Rx Harp</PackageTags>
     <PackageProjectUrl></PackageProjectUrl>
     <PackageLicenseExpression></PackageLicenseExpression>
     <PackageIcon></PackageIcon>
     <PackageOutputPath></PackageOutputPath>
     <TargetFrameworks>net462;netstandard2.0</TargetFrameworks>
-    <VersionPrefix>0.1.0-preview060201</VersionPrefix>
+    <VersionPrefix>0.1.0-preview230921</VersionPrefix>
     <LangVersion>9.0</LangVersion>
   </PropertyGroup>
 
