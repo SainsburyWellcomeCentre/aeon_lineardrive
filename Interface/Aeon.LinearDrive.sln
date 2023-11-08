@@ -1,9 +1,8 @@
-
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.3.32825.248
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{6A443B38-2F8E-4BA4-97FB-AAE7847644C0}") = "Harp.SwcLinearDrive", "Harp.SwcLinearDrive\Harp.SwcLinearDrive.csproj", "{8E461AA8-49F0-4156-B266-F9C6AE048417}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Aeon.LinearDrive", "Aeon.LinearDrive\Aeon.LinearDrive.csproj", "{8E461AA8-49F0-4156-B266-F9C6AE048417}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
