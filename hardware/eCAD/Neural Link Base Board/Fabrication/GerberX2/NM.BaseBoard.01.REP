@@ -1,0 +1,442 @@
+*************************************************************
+FileName = NM.BaseBoard.01.GBR
+AutoAperture = True
+*************************************************************
+Generating : Top Layer
+      File : NM.BaseBoard.01_Copper_Signal_Top.gbr
+
+    Adding Layer      : Top Layer
+
+    Adding Layer      : Multi-Layer
+
+
+Used DCodes :
+    D10
+    D11
+    D12
+    D13
+    D14
+    D15
+    D16
+    D17
+    D18
+    D19
+    D20
+    D21
+    D22
+    D23
+    D24
+    D25
+    D26
+    D27
+    D28
+    D29
+    D30
+    D31
+    D32
+    D33
+    D34
+    D35
+    D36
+    D37
+    D38
+    D39
+    D40
+    D41
+    D42
+    D43
+    D44
+    D45
+*************************************************************
+
+*************************************************************
+Generating : Bottom Layer
+      File : NM.BaseBoard.01_Copper_Signal_Bot.gbr
+
+    Adding Layer      : Bottom Layer
+
+    Adding Layer      : Multi-Layer
+
+
+Used DCodes :
+    D25
+    D26
+    D27
+    D28
+    D29
+    D30
+    D31
+    D32
+    D33
+    D34
+    D35
+    D36
+    D37
+    D38
+    D39
+    D40
+    D41
+    D42
+    D43
+    D44
+    D45
+*************************************************************
+
+*************************************************************
+Generating : Bottom Pad Master
+      File : NM.BaseBoard.01_Pads_Bot.gbr
+
+    Adding Layer      : Bottom Layer
+
+    Adding Layer      : Multi-Layer
+
+
+Used DCodes :
+    D28
+    D29
+    D30
+    D31
+    D32
+    D33
+    D34
+    D35
+    D36
+    D37
+    D38
+    D39
+    D40
+    D41
+    D42
+    D43
+*************************************************************
+
+*************************************************************
+Generating : Top Pad Master
+      File : NM.BaseBoard.01_Pads_Top.gbr
+
+    Adding Layer      : Top Layer
+
+    Adding Layer      : Multi-Layer
+
+
+Used DCodes :
+    D10
+    D11
+    D12
+    D13
+    D14
+    D15
+    D16
+    D17
+    D18
+    D19
+    D20
+    D21
+    D22
+    D23
+    D24
+    D28
+    D29
+    D30
+    D31
+    D32
+    D33
+    D34
+    D35
+    D36
+    D37
+    D38
+    D39
+    D40
+    D41
+    D42
+    D43
+*************************************************************
+
+*************************************************************
+Generating : Bottom Solder
+      File : NM.BaseBoard.01_Soldermask_Bot.gbr
+
+    Adding Layer      : Bottom Solder
+
+    Adding Layer      : Bottom Layer
+
+    Adding Layer      : Multi-Layer
+
+
+Used DCodes :
+    D28
+    D29
+    D30
+    D31
+    D32
+    D33
+    D34
+    D35
+    D36
+    D37
+    D38
+    D39
+    D40
+    D42
+    D43
+    D46
+*************************************************************
+
+*************************************************************
+Generating : Top Overlay
+      File : NM.BaseBoard.01_Legend_Top.gbr
+
+    Adding Layer      : Top Overlay
+
+
+Used DCodes :
+    D47
+    D48
+    D49
+    D50
+    D51
+    D52
+    D53
+*************************************************************
+
+*************************************************************
+Generating : Top Paste
+      File : NM.BaseBoard.01_Paste_Top.gbr
+
+    Adding Layer      : Top Paste
+
+    Adding Layer      : Top Layer
+
+    Adding Layer      : Multi-Layer
+
+
+Used DCodes :
+    D10
+    D11
+    D12
+    D13
+    D14
+    D17
+    D18
+    D19
+    D20
+    D21
+    D22
+    D23
+    D24
+    D54
+    D55
+    D56
+*************************************************************
+
+*************************************************************
+Generating : Top Solder
+      File : NM.BaseBoard.01_Soldermask_Top.gbr
+
+    Adding Layer      : Top Solder
+
+    Adding Layer      : Top Layer
+
+    Adding Layer      : Multi-Layer
+
+
+Used DCodes :
+    D10
+    D11
+    D12
+    D13
+    D14
+    D16
+    D17
+    D18
+    D19
+    D20
+    D21
+    D22
+    D23
+    D24
+    D28
+    D29
+    D30
+    D31
+    D32
+    D33
+    D34
+    D35
+    D36
+    D37
+    D38
+    D39
+    D40
+    D42
+    D43
+    D46
+    D57
+*************************************************************
+
+*************************************************************
+Generating : Board Shape
+      File : NM.BaseBoard.01_Board_Shape.gbr
+
+    Adding Layer      : Board Shape
+
+
+Used DCodes :
+    D51
+*************************************************************
+
+*************************************************************
+Generating : Top Component Center
+      File : NM.BaseBoard.01_Top_Component_Center.gbr
+
+    Adding Layer      : Top Component Center
+
+
+Used DCodes :
+    D51
+*************************************************************
+
+*************************************************************
+Generating : Mechanical 1
+      File : NM.BaseBoard.01_Mechanical_1.gbr
+
+    Adding Layer      : Mechanical 1
+
+
+Used DCodes :
+    D51
+*************************************************************
+
+*************************************************************
+Generating : Top Courtyard
+      File : NM.BaseBoard.01_Top_Courtyard.gbr
+
+    Adding Layer      : Top Courtyard
+
+
+Used DCodes :
+    D49
+    D50
+    D51
+    D58
+    D59
+    D60
+*************************************************************
+
+*************************************************************
+Generating : Top 3D Body
+      File : NM.BaseBoard.01_Top_3D_Body.gbr
+
+    Adding Layer      : Top 3D Body
+
+
+Used DCodes :
+    D50
+    D51
+    D52
+*************************************************************
+
+*************************************************************
+Generating : Top Component Outline
+      File : NM.BaseBoard.01_Top_Component_Outline.gbr
+
+    Adding Layer      : Top Component Outline
+
+
+Used DCodes :
+    D61
+    D62
+*************************************************************
+
+*************************************************************
+Generating : Top Assembly
+      File : NM.BaseBoard.01_Top_Assembly.gbr
+
+    Adding Layer      : Top Assembly
+
+
+Used DCodes :
+    D50
+    D51
+    D52
+    D59
+    D60
+    D63
+    D64
+*************************************************************
+
+*************************************************************
+Generating : Profile
+      File : NM.BaseBoard.01_Profile.gbr
+
+
+Used DCodes :
+    D65
+*************************************************************
+
+*************************************************************
+Generating : Non-plated through-hole drill file
+      File : NM.BaseBoard.01_NPTH_Drill.gbr
+
+
+Used DCodes :
+    D66
+    D67
+    D68
+    D69
+    D70
+*************************************************************
+
+*************************************************************
+Generating : Plated through-hole drill file
+      File : NM.BaseBoard.01_PTH_Drill.gbr
+
+
+Used DCodes :
+    D70
+    D71
+    D72
+    D73
+    D74
+    D75
+    D76
+    D77
+    D78
+    D79
+    D80
+    D81
+    D82
+    D83
+    D84
+*************************************************************
+
+*************************************************************
+Generating : Drill Drawing
+      File : NM.BaseBoard.01_Drawing_1.gbr
+
+    Adding Drill Pair : Top Layer-Bottom Layer
+
+    Adding Layer      : Drill Drawing
+
+
+Used DCodes :
+    D85
+    D86
+    D87
+    D88
+*************************************************************
+
+*************************************************************
+Generating : Drill Guide
+      File : NM.BaseBoard.01_Drillmap_1.gbr
+
+    Adding Drill Pair : Top Layer-Bottom Layer
+
+    Adding Layer      : Drill Guide
+
+
+Used DCodes :
+    D52
+*************************************************************
+
