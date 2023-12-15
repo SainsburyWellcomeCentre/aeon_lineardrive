@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<Project>
+  <NodeExplorer Name="Motion Manager" Active="1">
+    <COM Name="COM" Active="1">
+      <Mocom Name="Mocom" DispName="Standard COM" Active="1">
+        <COM06 Name="COM0-6" DispName="COM6" Active="1" PortNo="0" Channel="6" Baudrate="115200" ScanStart="0" ScanEnd="0">
+          <MC2RS Name="MC2RS" DispName="MC2RS" Active="1">
+            <MCBL3006SRS Name="MCBL3006S-RS" DispName="MCBL3006S-RS" Active="1" NodeNumber="2" SerialNumber="412200829" Family="0"/>
+          </MC2RS>
+        </COM06>
+      </Mocom>
+    </COM>
+  </NodeExplorer>
+  <DeviceSettings Name="DeviceSettings">
+    <N412200829 Name="412200829"/>
+  </DeviceSettings>
+</Project>
