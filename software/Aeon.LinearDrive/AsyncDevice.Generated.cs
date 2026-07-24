@@ -14,15 +14,18 @@ namespace Aeon.LinearDrive
         /// <param name="portName">
         /// The name of the serial port used to communicate with the Harp device.
         /// </param>
+        /// <param name="cancellationToken">
+        /// A <see cref="CancellationToken"/> which can be used to cancel the operation.
+        /// </param>
         /// <returns>
         /// A task that represents the asynchronous initialization operation. The value of
         /// the <see cref="Task{TResult}.Result"/> parameter contains a new instance of
         /// the <see cref="AsyncDevice"/> class.
         /// </returns>
-        public static async Task<AsyncDevice> CreateAsync(string portName)
+        public static async Task<AsyncDevice> CreateAsync(string portName, CancellationToken cancellationToken = default)
         {
             var device = new AsyncDevice(portName);
-            var whoAmI = await device.ReadWhoAmIAsync();
+            var whoAmI = await device.ReadWhoAmIAsync(cancellationToken);
             if (whoAmI != Device.WhoAmI)
             {
                 var errorMessage = string.Format(
@@ -46,14 +49,14 @@ namespace Aeon.LinearDrive
         }
 
         /// <summary>
-        /// Asynchronously reads the contents of the EnableMotorDriver register.
+        /// Asynchronously reads the contents of the <see cref="EnableMotorDriver"/> register.
         /// </summary>
         /// <param name="cancellationToken">
         /// A <see cref="CancellationToken"/> which can be used to cancel the operation.
         /// </param>
         /// <returns>
-        /// A task that represents the asynchronous read operation. The <see cref="Task{TResult}.Result"/>
-        /// property contains the register payload.
+        /// A task that represents the asynchronous read operation. The task result contains
+        /// the register payload.
         /// </returns>
         public async Task<EnableFlag> ReadEnableMotorDriverAsync(CancellationToken cancellationToken = default)
         {
@@ -62,14 +65,14 @@ namespace Aeon.LinearDrive
         }
 
         /// <summary>
-        /// Asynchronously reads the timestamped contents of the EnableMotorDriver register.
+        /// Asynchronously reads the timestamped contents of the <see cref="EnableMotorDriver"/> register.
         /// </summary>
         /// <param name="cancellationToken">
         /// A <see cref="CancellationToken"/> which can be used to cancel the operation.
         /// </param>
         /// <returns>
-        /// A task that represents the asynchronous read operation. The <see cref="Task{TResult}.Result"/>
-        /// property contains the timestamped register payload.
+        /// A task that represents the asynchronous read operation. The task result contains
+        /// the timestamped register payload.
         /// </returns>
         public async Task<Timestamped<EnableFlag>> ReadTimestampedEnableMotorDriverAsync(CancellationToken cancellationToken = default)
         {
@@ -78,9 +81,9 @@ namespace Aeon.LinearDrive
         }
 
         /// <summary>
-        /// Asynchronously writes a value to the EnableMotorDriver register.
+        /// Asynchronously writes a value to the <see cref="EnableMotorDriver"/> register.
         /// </summary>
-        /// <param name="value">The value to be stored in the register.</param>
+        /// <param name="value">The value to write in the register.</param>
         /// <param name="cancellationToken">
         /// A <see cref="CancellationToken"/> which can be used to cancel the operation.
         /// </param>
@@ -92,14 +95,14 @@ namespace Aeon.LinearDrive
         }
 
         /// <summary>
-        /// Asynchronously reads the contents of the LimitPosition register.
+        /// Asynchronously reads the contents of the <see cref="LimitPosition"/> register.
         /// </summary>
         /// <param name="cancellationToken">
         /// A <see cref="CancellationToken"/> which can be used to cancel the operation.
         /// </param>
         /// <returns>
-        /// A task that represents the asynchronous read operation. The <see cref="Task{TResult}.Result"/>
-        /// property contains the register payload.
+        /// A task that represents the asynchronous read operation. The task result contains
+        /// the register payload.
         /// </returns>
         public async Task<LimitPositionPayload> ReadLimitPositionAsync(CancellationToken cancellationToken = default)
         {
@@ -108,14 +111,14 @@ namespace Aeon.LinearDrive
         }
 
         /// <summary>
-        /// Asynchronously reads the timestamped contents of the LimitPosition register.
+        /// Asynchronously reads the timestamped contents of the <see cref="LimitPosition"/> register.
         /// </summary>
         /// <param name="cancellationToken">
         /// A <see cref="CancellationToken"/> which can be used to cancel the operation.
         /// </param>
         /// <returns>
-        /// A task that represents the asynchronous read operation. The <see cref="Task{TResult}.Result"/>
-        /// property contains the timestamped register payload.
+        /// A task that represents the asynchronous read operation. The task result contains
+        /// the timestamped register payload.
         /// </returns>
         public async Task<Timestamped<LimitPositionPayload>> ReadTimestampedLimitPositionAsync(CancellationToken cancellationToken = default)
         {
@@ -124,9 +127,9 @@ namespace Aeon.LinearDrive
         }
 
         /// <summary>
-        /// Asynchronously writes a value to the LimitPosition register.
+        /// Asynchronously writes a value to the <see cref="LimitPosition"/> register.
         /// </summary>
-        /// <param name="value">The value to be stored in the register.</param>
+        /// <param name="value">The value to write in the register.</param>
         /// <param name="cancellationToken">
         /// A <see cref="CancellationToken"/> which can be used to cancel the operation.
         /// </param>
@@ -138,14 +141,14 @@ namespace Aeon.LinearDrive
         }
 
         /// <summary>
-        /// Asynchronously reads the contents of the HomePosition register.
+        /// Asynchronously reads the contents of the <see cref="HomePosition"/> register.
         /// </summary>
         /// <param name="cancellationToken">
         /// A <see cref="CancellationToken"/> which can be used to cancel the operation.
         /// </param>
         /// <returns>
-        /// A task that represents the asynchronous read operation. The <see cref="Task{TResult}.Result"/>
-        /// property contains the register payload.
+        /// A task that represents the asynchronous read operation. The task result contains
+        /// the register payload.
         /// </returns>
         public async Task<int> ReadHomePositionAsync(CancellationToken cancellationToken = default)
         {
@@ -154,14 +157,14 @@ namespace Aeon.LinearDrive
         }
 
         /// <summary>
-        /// Asynchronously reads the timestamped contents of the HomePosition register.
+        /// Asynchronously reads the timestamped contents of the <see cref="HomePosition"/> register.
         /// </summary>
         /// <param name="cancellationToken">
         /// A <see cref="CancellationToken"/> which can be used to cancel the operation.
         /// </param>
         /// <returns>
-        /// A task that represents the asynchronous read operation. The <see cref="Task{TResult}.Result"/>
-        /// property contains the timestamped register payload.
+        /// A task that represents the asynchronous read operation. The task result contains
+        /// the timestamped register payload.
         /// </returns>
         public async Task<Timestamped<int>> ReadTimestampedHomePositionAsync(CancellationToken cancellationToken = default)
         {
@@ -170,9 +173,9 @@ namespace Aeon.LinearDrive
         }
 
         /// <summary>
-        /// Asynchronously writes a value to the HomePosition register.
+        /// Asynchronously writes a value to the <see cref="HomePosition"/> register.
         /// </summary>
-        /// <param name="value">The value to be stored in the register.</param>
+        /// <param name="value">The value to write in the register.</param>
         /// <param name="cancellationToken">
         /// A <see cref="CancellationToken"/> which can be used to cancel the operation.
         /// </param>
@@ -184,14 +187,14 @@ namespace Aeon.LinearDrive
         }
 
         /// <summary>
-        /// Asynchronously reads the contents of the SetPosition register.
+        /// Asynchronously reads the contents of the <see cref="SetPosition"/> register.
         /// </summary>
         /// <param name="cancellationToken">
         /// A <see cref="CancellationToken"/> which can be used to cancel the operation.
         /// </param>
         /// <returns>
-        /// A task that represents the asynchronous read operation. The <see cref="Task{TResult}.Result"/>
-        /// property contains the register payload.
+        /// A task that represents the asynchronous read operation. The task result contains
+        /// the register payload.
         /// </returns>
         public async Task<int> ReadSetPositionAsync(CancellationToken cancellationToken = default)
         {
@@ -200,14 +203,14 @@ namespace Aeon.LinearDrive
         }
 
         /// <summary>
-        /// Asynchronously reads the timestamped contents of the SetPosition register.
+        /// Asynchronously reads the timestamped contents of the <see cref="SetPosition"/> register.
         /// </summary>
         /// <param name="cancellationToken">
         /// A <see cref="CancellationToken"/> which can be used to cancel the operation.
         /// </param>
         /// <returns>
-        /// A task that represents the asynchronous read operation. The <see cref="Task{TResult}.Result"/>
-        /// property contains the timestamped register payload.
+        /// A task that represents the asynchronous read operation. The task result contains
+        /// the timestamped register payload.
         /// </returns>
         public async Task<Timestamped<int>> ReadTimestampedSetPositionAsync(CancellationToken cancellationToken = default)
         {
@@ -216,9 +219,9 @@ namespace Aeon.LinearDrive
         }
 
         /// <summary>
-        /// Asynchronously writes a value to the SetPosition register.
+        /// Asynchronously writes a value to the <see cref="SetPosition"/> register.
         /// </summary>
-        /// <param name="value">The value to be stored in the register.</param>
+        /// <param name="value">The value to write in the register.</param>
         /// <param name="cancellationToken">
         /// A <see cref="CancellationToken"/> which can be used to cancel the operation.
         /// </param>
@@ -230,14 +233,14 @@ namespace Aeon.LinearDrive
         }
 
         /// <summary>
-        /// Asynchronously reads the contents of the Position register.
+        /// Asynchronously reads the contents of the <see cref="Position"/> register.
         /// </summary>
         /// <param name="cancellationToken">
         /// A <see cref="CancellationToken"/> which can be used to cancel the operation.
         /// </param>
         /// <returns>
-        /// A task that represents the asynchronous read operation. The <see cref="Task{TResult}.Result"/>
-        /// property contains the register payload.
+        /// A task that represents the asynchronous read operation. The task result contains
+        /// the register payload.
         /// </returns>
         public async Task<int> ReadPositionAsync(CancellationToken cancellationToken = default)
         {
@@ -246,14 +249,14 @@ namespace Aeon.LinearDrive
         }
 
         /// <summary>
-        /// Asynchronously reads the timestamped contents of the Position register.
+        /// Asynchronously reads the timestamped contents of the <see cref="Position"/> register.
         /// </summary>
         /// <param name="cancellationToken">
         /// A <see cref="CancellationToken"/> which can be used to cancel the operation.
         /// </param>
         /// <returns>
-        /// A task that represents the asynchronous read operation. The <see cref="Task{TResult}.Result"/>
-        /// property contains the timestamped register payload.
+        /// A task that represents the asynchronous read operation. The task result contains
+        /// the timestamped register payload.
         /// </returns>
         public async Task<Timestamped<int>> ReadTimestampedPositionAsync(CancellationToken cancellationToken = default)
         {
@@ -262,14 +265,14 @@ namespace Aeon.LinearDrive
         }
 
         /// <summary>
-        /// Asynchronously reads the contents of the LimitSpeed register.
+        /// Asynchronously reads the contents of the <see cref="LimitSpeed"/> register.
         /// </summary>
         /// <param name="cancellationToken">
         /// A <see cref="CancellationToken"/> which can be used to cancel the operation.
         /// </param>
         /// <returns>
-        /// A task that represents the asynchronous read operation. The <see cref="Task{TResult}.Result"/>
-        /// property contains the register payload.
+        /// A task that represents the asynchronous read operation. The task result contains
+        /// the register payload.
         /// </returns>
         public async Task<ushort> ReadLimitSpeedAsync(CancellationToken cancellationToken = default)
         {
@@ -278,14 +281,14 @@ namespace Aeon.LinearDrive
         }
 
         /// <summary>
-        /// Asynchronously reads the timestamped contents of the LimitSpeed register.
+        /// Asynchronously reads the timestamped contents of the <see cref="LimitSpeed"/> register.
         /// </summary>
         /// <param name="cancellationToken">
         /// A <see cref="CancellationToken"/> which can be used to cancel the operation.
         /// </param>
         /// <returns>
-        /// A task that represents the asynchronous read operation. The <see cref="Task{TResult}.Result"/>
-        /// property contains the timestamped register payload.
+        /// A task that represents the asynchronous read operation. The task result contains
+        /// the timestamped register payload.
         /// </returns>
         public async Task<Timestamped<ushort>> ReadTimestampedLimitSpeedAsync(CancellationToken cancellationToken = default)
         {
@@ -294,9 +297,9 @@ namespace Aeon.LinearDrive
         }
 
         /// <summary>
-        /// Asynchronously writes a value to the LimitSpeed register.
+        /// Asynchronously writes a value to the <see cref="LimitSpeed"/> register.
         /// </summary>
-        /// <param name="value">The value to be stored in the register.</param>
+        /// <param name="value">The value to write in the register.</param>
         /// <param name="cancellationToken">
         /// A <see cref="CancellationToken"/> which can be used to cancel the operation.
         /// </param>
@@ -308,14 +311,14 @@ namespace Aeon.LinearDrive
         }
 
         /// <summary>
-        /// Asynchronously reads the contents of the SetSpeed register.
+        /// Asynchronously reads the contents of the <see cref="SetSpeed"/> register.
         /// </summary>
         /// <param name="cancellationToken">
         /// A <see cref="CancellationToken"/> which can be used to cancel the operation.
         /// </param>
         /// <returns>
-        /// A task that represents the asynchronous read operation. The <see cref="Task{TResult}.Result"/>
-        /// property contains the register payload.
+        /// A task that represents the asynchronous read operation. The task result contains
+        /// the register payload.
         /// </returns>
         public async Task<short> ReadSetSpeedAsync(CancellationToken cancellationToken = default)
         {
@@ -324,14 +327,14 @@ namespace Aeon.LinearDrive
         }
 
         /// <summary>
-        /// Asynchronously reads the timestamped contents of the SetSpeed register.
+        /// Asynchronously reads the timestamped contents of the <see cref="SetSpeed"/> register.
         /// </summary>
         /// <param name="cancellationToken">
         /// A <see cref="CancellationToken"/> which can be used to cancel the operation.
         /// </param>
         /// <returns>
-        /// A task that represents the asynchronous read operation. The <see cref="Task{TResult}.Result"/>
-        /// property contains the timestamped register payload.
+        /// A task that represents the asynchronous read operation. The task result contains
+        /// the timestamped register payload.
         /// </returns>
         public async Task<Timestamped<short>> ReadTimestampedSetSpeedAsync(CancellationToken cancellationToken = default)
         {
@@ -340,9 +343,9 @@ namespace Aeon.LinearDrive
         }
 
         /// <summary>
-        /// Asynchronously writes a value to the SetSpeed register.
+        /// Asynchronously writes a value to the <see cref="SetSpeed"/> register.
         /// </summary>
-        /// <param name="value">The value to be stored in the register.</param>
+        /// <param name="value">The value to write in the register.</param>
         /// <param name="cancellationToken">
         /// A <see cref="CancellationToken"/> which can be used to cancel the operation.
         /// </param>
@@ -354,14 +357,14 @@ namespace Aeon.LinearDrive
         }
 
         /// <summary>
-        /// Asynchronously reads the contents of the Speed register.
+        /// Asynchronously reads the contents of the <see cref="Speed"/> register.
         /// </summary>
         /// <param name="cancellationToken">
         /// A <see cref="CancellationToken"/> which can be used to cancel the operation.
         /// </param>
         /// <returns>
-        /// A task that represents the asynchronous read operation. The <see cref="Task{TResult}.Result"/>
-        /// property contains the register payload.
+        /// A task that represents the asynchronous read operation. The task result contains
+        /// the register payload.
         /// </returns>
         public async Task<short> ReadSpeedAsync(CancellationToken cancellationToken = default)
         {
@@ -370,14 +373,14 @@ namespace Aeon.LinearDrive
         }
 
         /// <summary>
-        /// Asynchronously reads the timestamped contents of the Speed register.
+        /// Asynchronously reads the timestamped contents of the <see cref="Speed"/> register.
         /// </summary>
         /// <param name="cancellationToken">
         /// A <see cref="CancellationToken"/> which can be used to cancel the operation.
         /// </param>
         /// <returns>
-        /// A task that represents the asynchronous read operation. The <see cref="Task{TResult}.Result"/>
-        /// property contains the timestamped register payload.
+        /// A task that represents the asynchronous read operation. The task result contains
+        /// the timestamped register payload.
         /// </returns>
         public async Task<Timestamped<short>> ReadTimestampedSpeedAsync(CancellationToken cancellationToken = default)
         {
@@ -386,14 +389,14 @@ namespace Aeon.LinearDrive
         }
 
         /// <summary>
-        /// Asynchronously reads the contents of the LimitContinuousCurrent register.
+        /// Asynchronously reads the contents of the <see cref="LimitContinuousCurrent"/> register.
         /// </summary>
         /// <param name="cancellationToken">
         /// A <see cref="CancellationToken"/> which can be used to cancel the operation.
         /// </param>
         /// <returns>
-        /// A task that represents the asynchronous read operation. The <see cref="Task{TResult}.Result"/>
-        /// property contains the register payload.
+        /// A task that represents the asynchronous read operation. The task result contains
+        /// the register payload.
         /// </returns>
         public async Task<ushort> ReadLimitContinuousCurrentAsync(CancellationToken cancellationToken = default)
         {
@@ -402,14 +405,14 @@ namespace Aeon.LinearDrive
         }
 
         /// <summary>
-        /// Asynchronously reads the timestamped contents of the LimitContinuousCurrent register.
+        /// Asynchronously reads the timestamped contents of the <see cref="LimitContinuousCurrent"/> register.
         /// </summary>
         /// <param name="cancellationToken">
         /// A <see cref="CancellationToken"/> which can be used to cancel the operation.
         /// </param>
         /// <returns>
-        /// A task that represents the asynchronous read operation. The <see cref="Task{TResult}.Result"/>
-        /// property contains the timestamped register payload.
+        /// A task that represents the asynchronous read operation. The task result contains
+        /// the timestamped register payload.
         /// </returns>
         public async Task<Timestamped<ushort>> ReadTimestampedLimitContinuousCurrentAsync(CancellationToken cancellationToken = default)
         {
@@ -418,9 +421,9 @@ namespace Aeon.LinearDrive
         }
 
         /// <summary>
-        /// Asynchronously writes a value to the LimitContinuousCurrent register.
+        /// Asynchronously writes a value to the <see cref="LimitContinuousCurrent"/> register.
         /// </summary>
-        /// <param name="value">The value to be stored in the register.</param>
+        /// <param name="value">The value to write in the register.</param>
         /// <param name="cancellationToken">
         /// A <see cref="CancellationToken"/> which can be used to cancel the operation.
         /// </param>
@@ -432,14 +435,14 @@ namespace Aeon.LinearDrive
         }
 
         /// <summary>
-        /// Asynchronously reads the contents of the LimitPeakCurrent register.
+        /// Asynchronously reads the contents of the <see cref="LimitPeakCurrent"/> register.
         /// </summary>
         /// <param name="cancellationToken">
         /// A <see cref="CancellationToken"/> which can be used to cancel the operation.
         /// </param>
         /// <returns>
-        /// A task that represents the asynchronous read operation. The <see cref="Task{TResult}.Result"/>
-        /// property contains the register payload.
+        /// A task that represents the asynchronous read operation. The task result contains
+        /// the register payload.
         /// </returns>
         public async Task<ushort> ReadLimitPeakCurrentAsync(CancellationToken cancellationToken = default)
         {
@@ -448,14 +451,14 @@ namespace Aeon.LinearDrive
         }
 
         /// <summary>
-        /// Asynchronously reads the timestamped contents of the LimitPeakCurrent register.
+        /// Asynchronously reads the timestamped contents of the <see cref="LimitPeakCurrent"/> register.
         /// </summary>
         /// <param name="cancellationToken">
         /// A <see cref="CancellationToken"/> which can be used to cancel the operation.
         /// </param>
         /// <returns>
-        /// A task that represents the asynchronous read operation. The <see cref="Task{TResult}.Result"/>
-        /// property contains the timestamped register payload.
+        /// A task that represents the asynchronous read operation. The task result contains
+        /// the timestamped register payload.
         /// </returns>
         public async Task<Timestamped<ushort>> ReadTimestampedLimitPeakCurrentAsync(CancellationToken cancellationToken = default)
         {
@@ -464,9 +467,9 @@ namespace Aeon.LinearDrive
         }
 
         /// <summary>
-        /// Asynchronously writes a value to the LimitPeakCurrent register.
+        /// Asynchronously writes a value to the <see cref="LimitPeakCurrent"/> register.
         /// </summary>
-        /// <param name="value">The value to be stored in the register.</param>
+        /// <param name="value">The value to write in the register.</param>
         /// <param name="cancellationToken">
         /// A <see cref="CancellationToken"/> which can be used to cancel the operation.
         /// </param>
@@ -478,14 +481,14 @@ namespace Aeon.LinearDrive
         }
 
         /// <summary>
-        /// Asynchronously reads the contents of the EnableLimitPosition register.
+        /// Asynchronously reads the contents of the <see cref="EnableLimitPosition"/> register.
         /// </summary>
         /// <param name="cancellationToken">
         /// A <see cref="CancellationToken"/> which can be used to cancel the operation.
         /// </param>
         /// <returns>
-        /// A task that represents the asynchronous read operation. The <see cref="Task{TResult}.Result"/>
-        /// property contains the register payload.
+        /// A task that represents the asynchronous read operation. The task result contains
+        /// the register payload.
         /// </returns>
         public async Task<EnableFlag> ReadEnableLimitPositionAsync(CancellationToken cancellationToken = default)
         {
@@ -494,14 +497,14 @@ namespace Aeon.LinearDrive
         }
 
         /// <summary>
-        /// Asynchronously reads the timestamped contents of the EnableLimitPosition register.
+        /// Asynchronously reads the timestamped contents of the <see cref="EnableLimitPosition"/> register.
         /// </summary>
         /// <param name="cancellationToken">
         /// A <see cref="CancellationToken"/> which can be used to cancel the operation.
         /// </param>
         /// <returns>
-        /// A task that represents the asynchronous read operation. The <see cref="Task{TResult}.Result"/>
-        /// property contains the timestamped register payload.
+        /// A task that represents the asynchronous read operation. The task result contains
+        /// the timestamped register payload.
         /// </returns>
         public async Task<Timestamped<EnableFlag>> ReadTimestampedEnableLimitPositionAsync(CancellationToken cancellationToken = default)
         {
@@ -510,9 +513,9 @@ namespace Aeon.LinearDrive
         }
 
         /// <summary>
-        /// Asynchronously writes a value to the EnableLimitPosition register.
+        /// Asynchronously writes a value to the <see cref="EnableLimitPosition"/> register.
         /// </summary>
-        /// <param name="value">The value to be stored in the register.</param>
+        /// <param name="value">The value to write in the register.</param>
         /// <param name="cancellationToken">
         /// A <see cref="CancellationToken"/> which can be used to cancel the operation.
         /// </param>

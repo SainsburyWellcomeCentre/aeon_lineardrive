@@ -1,13 +1,7 @@
-
-desktop.ini
-
-# Visual studio files
-.vs
-.suo
-.nuget
-bin
-obj
-Debug
-packages
-*.componentinfo.xml
-local
+.bonsai/Bonsai.exe*
+.bonsai/Packages/
+.bonsai/Settings/
+.vs/
+/artifacts/
+*.user
+__pycache__/
