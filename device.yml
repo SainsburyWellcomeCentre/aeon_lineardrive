@@ -17,59 +17,59 @@ registers:
     access: Write
     type: S32
     length: 2
-    description: Configures the position limits of the motor.
+    description: Configures the position limits of the motor, in encoder counts.
     payloadSpec:
       Minimum:
         offset: 0
         defaultValue: -1000
-        description: The minimum allowed position of the motor
+        description: The minimum allowed position of the motor, in encoder counts
       Maximum:
         offset: 1
         defaultValue: 160000
-        description: The maximum allowed position of the motor
+        description: The maximum allowed position of the motor, in encoder counts
   HomePosition:
     address: 42
     access: Write
     type: S32
-    description: Sets the home position of the motor.
+    description: Sets the home position of the motor, in encoder counts.
   SetPosition:
     address: 43
     access: Write
     type: S32
-    description: Sets the current position of the motor. Reads return the last instruction.
+    description: Sets the current position of the motor, in encoder counts. Reads return the last instruction.
   Position:
     address: 44
     access: Event
     type: S32
-    description: Returns a periodic event with the current position of the motor.
+    description: Returns a periodic event with the current position of the motor, in encoder counts.
   LimitSpeed:
     address: 45
     access: Write
     type: U16
     defaultValue: 7583
-    description: Sets the maximum speed of the motor.
+    description: Sets the maximum speed of the motor, in rpm.
   SetSpeed:
     address: 33
     access: Write
     type: S16
-    description: Sets the current speed of the motor.
+    description: Sets the current speed of the motor, in rpm.
   Speed:
     address: 34
     access: Event
     type: S16
-    description: Returns a periodic event with the current (mA) speed of the motor.
+    description: Returns a periodic event with the current speed of the motor, in rpm.
   LimitContinuousCurrent:
     address: 46
     access: Write
     type: U16
     defaultValue: 900
-    description: Sets the maximum continuous current (mA) limit the drive is able to supply.
+    description: Sets the maximum continuous current limit the drive is able to supply, in mA.
   LimitPeakCurrent:
     address: 47
     access: Write
     type: U16
     defaultValue: 900
-    description: Sets the maximum peak current limit the drive is able to supply.
+    description: Sets the maximum peak current limit the drive is able to supply, in mA.
   EnableLimitPosition:
     address: 48
     access: Write

@@ -490,9 +490,9 @@ namespace Aeon.LinearDrive
     }
 
     /// <summary>
-    /// Represents a register that configures the position limits of the motor.
+    /// Represents a register that configures the position limits of the motor, in encoder counts.
     /// </summary>
-    [Description("Configures the position limits of the motor.")]
+    [Description("Configures the position limits of the motor, in encoder counts.")]
     public partial class LimitPosition
     {
         /// <summary>
@@ -604,9 +604,9 @@ namespace Aeon.LinearDrive
     }
 
     /// <summary>
-    /// Represents a register that sets the home position of the motor.
+    /// Represents a register that sets the home position of the motor, in encoder counts.
     /// </summary>
-    [Description("Sets the home position of the motor.")]
+    [Description("Sets the home position of the motor, in encoder counts.")]
     public partial class HomePosition
     {
         /// <summary>
@@ -700,9 +700,9 @@ namespace Aeon.LinearDrive
     }
 
     /// <summary>
-    /// Represents a register that sets the current position of the motor. Reads return the last instruction.
+    /// Represents a register that sets the current position of the motor, in encoder counts. Reads return the last instruction.
     /// </summary>
-    [Description("Sets the current position of the motor. Reads return the last instruction.")]
+    [Description("Sets the current position of the motor, in encoder counts. Reads return the last instruction.")]
     public partial class SetPosition
     {
         /// <summary>
@@ -796,9 +796,9 @@ namespace Aeon.LinearDrive
     }
 
     /// <summary>
-    /// Represents a register that returns a periodic event with the current position of the motor.
+    /// Represents a register that returns a periodic event with the current position of the motor, in encoder counts.
     /// </summary>
-    [Description("Returns a periodic event with the current position of the motor.")]
+    [Description("Returns a periodic event with the current position of the motor, in encoder counts.")]
     public partial class Position
     {
         /// <summary>
@@ -892,9 +892,9 @@ namespace Aeon.LinearDrive
     }
 
     /// <summary>
-    /// Represents a register that sets the maximum speed of the motor.
+    /// Represents a register that sets the maximum speed of the motor, in rpm.
     /// </summary>
-    [Description("Sets the maximum speed of the motor.")]
+    [Description("Sets the maximum speed of the motor, in rpm.")]
     public partial class LimitSpeed
     {
         /// <summary>
@@ -988,9 +988,9 @@ namespace Aeon.LinearDrive
     }
 
     /// <summary>
-    /// Represents a register that sets the current speed of the motor.
+    /// Represents a register that sets the current speed of the motor, in rpm.
     /// </summary>
-    [Description("Sets the current speed of the motor.")]
+    [Description("Sets the current speed of the motor, in rpm.")]
     public partial class SetSpeed
     {
         /// <summary>
@@ -1084,9 +1084,9 @@ namespace Aeon.LinearDrive
     }
 
     /// <summary>
-    /// Represents a register that returns a periodic event with the current (mA) speed of the motor.
+    /// Represents a register that returns a periodic event with the current speed of the motor, in rpm.
     /// </summary>
-    [Description("Returns a periodic event with the current (mA) speed of the motor.")]
+    [Description("Returns a periodic event with the current speed of the motor, in rpm.")]
     public partial class Speed
     {
         /// <summary>
@@ -1180,9 +1180,9 @@ namespace Aeon.LinearDrive
     }
 
     /// <summary>
-    /// Represents a register that sets the maximum continuous current (mA) limit the drive is able to supply.
+    /// Represents a register that sets the maximum continuous current limit the drive is able to supply, in mA.
     /// </summary>
-    [Description("Sets the maximum continuous current (mA) limit the drive is able to supply.")]
+    [Description("Sets the maximum continuous current limit the drive is able to supply, in mA.")]
     public partial class LimitContinuousCurrent
     {
         /// <summary>
@@ -1276,9 +1276,9 @@ namespace Aeon.LinearDrive
     }
 
     /// <summary>
-    /// Represents a register that sets the maximum peak current limit the drive is able to supply.
+    /// Represents a register that sets the maximum peak current limit the drive is able to supply, in mA.
     /// </summary>
-    [Description("Sets the maximum peak current limit the drive is able to supply.")]
+    [Description("Sets the maximum peak current limit the drive is able to supply, in mA.")]
     public partial class LimitPeakCurrent
     {
         /// <summary>
@@ -1575,22 +1575,22 @@ namespace Aeon.LinearDrive
 
     /// <summary>
     /// Represents an operator that creates a message payload
-    /// that configures the position limits of the motor.
+    /// that configures the position limits of the motor, in encoder counts.
     /// </summary>
     [DisplayName("LimitPositionPayload")]
-    [Description("Creates a message payload that configures the position limits of the motor.")]
+    [Description("Creates a message payload that configures the position limits of the motor, in encoder counts.")]
     public partial class CreateLimitPositionPayload
     {
         /// <summary>
-        /// Gets or sets a value that the minimum allowed position of the motor.
+        /// Gets or sets a value that the minimum allowed position of the motor, in encoder counts.
         /// </summary>
-        [Description("The minimum allowed position of the motor")]
+        [Description("The minimum allowed position of the motor, in encoder counts")]
         public int Minimum { get; set; } = -1000;
 
         /// <summary>
-        /// Gets or sets a value that the maximum allowed position of the motor.
+        /// Gets or sets a value that the maximum allowed position of the motor, in encoder counts.
         /// </summary>
-        [Description("The maximum allowed position of the motor")]
+        [Description("The maximum allowed position of the motor, in encoder counts")]
         public int Maximum { get; set; } = 160000;
 
         /// <summary>
@@ -1606,7 +1606,7 @@ namespace Aeon.LinearDrive
         }
 
         /// <summary>
-        /// Creates a message that configures the position limits of the motor.
+        /// Creates a message that configures the position limits of the motor, in encoder counts.
         /// </summary>
         /// <param name="messageType">Specifies the type of the created message.</param>
         /// <returns>A new message for the LimitPosition register.</returns>
@@ -1618,14 +1618,14 @@ namespace Aeon.LinearDrive
 
     /// <summary>
     /// Represents an operator that creates a timestamped message payload
-    /// that configures the position limits of the motor.
+    /// that configures the position limits of the motor, in encoder counts.
     /// </summary>
     [DisplayName("TimestampedLimitPositionPayload")]
-    [Description("Creates a timestamped message payload that configures the position limits of the motor.")]
+    [Description("Creates a timestamped message payload that configures the position limits of the motor, in encoder counts.")]
     public partial class CreateTimestampedLimitPositionPayload : CreateLimitPositionPayload
     {
         /// <summary>
-        /// Creates a timestamped message that configures the position limits of the motor.
+        /// Creates a timestamped message that configures the position limits of the motor, in encoder counts.
         /// </summary>
         /// <param name="timestamp">The timestamp of the message payload, in seconds.</param>
         /// <param name="messageType">Specifies the type of the created message.</param>
@@ -1638,16 +1638,16 @@ namespace Aeon.LinearDrive
 
     /// <summary>
     /// Represents an operator that creates a message payload
-    /// that sets the home position of the motor.
+    /// that sets the home position of the motor, in encoder counts.
     /// </summary>
     [DisplayName("HomePositionPayload")]
-    [Description("Creates a message payload that sets the home position of the motor.")]
+    [Description("Creates a message payload that sets the home position of the motor, in encoder counts.")]
     public partial class CreateHomePositionPayload
     {
         /// <summary>
-        /// Gets or sets the value that sets the home position of the motor.
+        /// Gets or sets the value that sets the home position of the motor, in encoder counts.
         /// </summary>
-        [Description("The value that sets the home position of the motor.")]
+        [Description("The value that sets the home position of the motor, in encoder counts.")]
         public int HomePosition { get; set; }
 
         /// <summary>
@@ -1660,7 +1660,7 @@ namespace Aeon.LinearDrive
         }
 
         /// <summary>
-        /// Creates a message that sets the home position of the motor.
+        /// Creates a message that sets the home position of the motor, in encoder counts.
         /// </summary>
         /// <param name="messageType">Specifies the type of the created message.</param>
         /// <returns>A new message for the HomePosition register.</returns>
@@ -1672,14 +1672,14 @@ namespace Aeon.LinearDrive
 
     /// <summary>
     /// Represents an operator that creates a timestamped message payload
-    /// that sets the home position of the motor.
+    /// that sets the home position of the motor, in encoder counts.
     /// </summary>
     [DisplayName("TimestampedHomePositionPayload")]
-    [Description("Creates a timestamped message payload that sets the home position of the motor.")]
+    [Description("Creates a timestamped message payload that sets the home position of the motor, in encoder counts.")]
     public partial class CreateTimestampedHomePositionPayload : CreateHomePositionPayload
     {
         /// <summary>
-        /// Creates a timestamped message that sets the home position of the motor.
+        /// Creates a timestamped message that sets the home position of the motor, in encoder counts.
         /// </summary>
         /// <param name="timestamp">The timestamp of the message payload, in seconds.</param>
         /// <param name="messageType">Specifies the type of the created message.</param>
@@ -1692,16 +1692,16 @@ namespace Aeon.LinearDrive
 
     /// <summary>
     /// Represents an operator that creates a message payload
-    /// that sets the current position of the motor. Reads return the last instruction.
+    /// that sets the current position of the motor, in encoder counts. Reads return the last instruction.
     /// </summary>
     [DisplayName("SetPositionPayload")]
-    [Description("Creates a message payload that sets the current position of the motor. Reads return the last instruction.")]
+    [Description("Creates a message payload that sets the current position of the motor, in encoder counts. Reads return the last instruction.")]
     public partial class CreateSetPositionPayload
     {
         /// <summary>
-        /// Gets or sets the value that sets the current position of the motor. Reads return the last instruction.
+        /// Gets or sets the value that sets the current position of the motor, in encoder counts. Reads return the last instruction.
         /// </summary>
-        [Description("The value that sets the current position of the motor. Reads return the last instruction.")]
+        [Description("The value that sets the current position of the motor, in encoder counts. Reads return the last instruction.")]
         public int SetPosition { get; set; }
 
         /// <summary>
@@ -1714,7 +1714,7 @@ namespace Aeon.LinearDrive
         }
 
         /// <summary>
-        /// Creates a message that sets the current position of the motor. Reads return the last instruction.
+        /// Creates a message that sets the current position of the motor, in encoder counts. Reads return the last instruction.
         /// </summary>
         /// <param name="messageType">Specifies the type of the created message.</param>
         /// <returns>A new message for the SetPosition register.</returns>
@@ -1726,14 +1726,14 @@ namespace Aeon.LinearDrive
 
     /// <summary>
     /// Represents an operator that creates a timestamped message payload
-    /// that sets the current position of the motor. Reads return the last instruction.
+    /// that sets the current position of the motor, in encoder counts. Reads return the last instruction.
     /// </summary>
     [DisplayName("TimestampedSetPositionPayload")]
-    [Description("Creates a timestamped message payload that sets the current position of the motor. Reads return the last instruction.")]
+    [Description("Creates a timestamped message payload that sets the current position of the motor, in encoder counts. Reads return the last instruction.")]
     public partial class CreateTimestampedSetPositionPayload : CreateSetPositionPayload
     {
         /// <summary>
-        /// Creates a timestamped message that sets the current position of the motor. Reads return the last instruction.
+        /// Creates a timestamped message that sets the current position of the motor, in encoder counts. Reads return the last instruction.
         /// </summary>
         /// <param name="timestamp">The timestamp of the message payload, in seconds.</param>
         /// <param name="messageType">Specifies the type of the created message.</param>
@@ -1746,16 +1746,16 @@ namespace Aeon.LinearDrive
 
     /// <summary>
     /// Represents an operator that creates a message payload
-    /// that returns a periodic event with the current position of the motor.
+    /// that returns a periodic event with the current position of the motor, in encoder counts.
     /// </summary>
     [DisplayName("PositionPayload")]
-    [Description("Creates a message payload that returns a periodic event with the current position of the motor.")]
+    [Description("Creates a message payload that returns a periodic event with the current position of the motor, in encoder counts.")]
     public partial class CreatePositionPayload
     {
         /// <summary>
-        /// Gets or sets the value that returns a periodic event with the current position of the motor.
+        /// Gets or sets the value that returns a periodic event with the current position of the motor, in encoder counts.
         /// </summary>
-        [Description("The value that returns a periodic event with the current position of the motor.")]
+        [Description("The value that returns a periodic event with the current position of the motor, in encoder counts.")]
         public int Position { get; set; }
 
         /// <summary>
@@ -1768,7 +1768,7 @@ namespace Aeon.LinearDrive
         }
 
         /// <summary>
-        /// Creates a message that returns a periodic event with the current position of the motor.
+        /// Creates a message that returns a periodic event with the current position of the motor, in encoder counts.
         /// </summary>
         /// <param name="messageType">Specifies the type of the created message.</param>
         /// <returns>A new message for the Position register.</returns>
@@ -1780,14 +1780,14 @@ namespace Aeon.LinearDrive
 
     /// <summary>
     /// Represents an operator that creates a timestamped message payload
-    /// that returns a periodic event with the current position of the motor.
+    /// that returns a periodic event with the current position of the motor, in encoder counts.
     /// </summary>
     [DisplayName("TimestampedPositionPayload")]
-    [Description("Creates a timestamped message payload that returns a periodic event with the current position of the motor.")]
+    [Description("Creates a timestamped message payload that returns a periodic event with the current position of the motor, in encoder counts.")]
     public partial class CreateTimestampedPositionPayload : CreatePositionPayload
     {
         /// <summary>
-        /// Creates a timestamped message that returns a periodic event with the current position of the motor.
+        /// Creates a timestamped message that returns a periodic event with the current position of the motor, in encoder counts.
         /// </summary>
         /// <param name="timestamp">The timestamp of the message payload, in seconds.</param>
         /// <param name="messageType">Specifies the type of the created message.</param>
@@ -1800,16 +1800,16 @@ namespace Aeon.LinearDrive
 
     /// <summary>
     /// Represents an operator that creates a message payload
-    /// that sets the maximum speed of the motor.
+    /// that sets the maximum speed of the motor, in rpm.
     /// </summary>
     [DisplayName("LimitSpeedPayload")]
-    [Description("Creates a message payload that sets the maximum speed of the motor.")]
+    [Description("Creates a message payload that sets the maximum speed of the motor, in rpm.")]
     public partial class CreateLimitSpeedPayload
     {
         /// <summary>
-        /// Gets or sets the value that sets the maximum speed of the motor.
+        /// Gets or sets the value that sets the maximum speed of the motor, in rpm.
         /// </summary>
-        [Description("The value that sets the maximum speed of the motor.")]
+        [Description("The value that sets the maximum speed of the motor, in rpm.")]
         public ushort LimitSpeed { get; set; } = 7583;
 
         /// <summary>
@@ -1822,7 +1822,7 @@ namespace Aeon.LinearDrive
         }
 
         /// <summary>
-        /// Creates a message that sets the maximum speed of the motor.
+        /// Creates a message that sets the maximum speed of the motor, in rpm.
         /// </summary>
         /// <param name="messageType">Specifies the type of the created message.</param>
         /// <returns>A new message for the LimitSpeed register.</returns>
@@ -1834,14 +1834,14 @@ namespace Aeon.LinearDrive
 
     /// <summary>
     /// Represents an operator that creates a timestamped message payload
-    /// that sets the maximum speed of the motor.
+    /// that sets the maximum speed of the motor, in rpm.
     /// </summary>
     [DisplayName("TimestampedLimitSpeedPayload")]
-    [Description("Creates a timestamped message payload that sets the maximum speed of the motor.")]
+    [Description("Creates a timestamped message payload that sets the maximum speed of the motor, in rpm.")]
     public partial class CreateTimestampedLimitSpeedPayload : CreateLimitSpeedPayload
     {
         /// <summary>
-        /// Creates a timestamped message that sets the maximum speed of the motor.
+        /// Creates a timestamped message that sets the maximum speed of the motor, in rpm.
         /// </summary>
         /// <param name="timestamp">The timestamp of the message payload, in seconds.</param>
         /// <param name="messageType">Specifies the type of the created message.</param>
@@ -1854,16 +1854,16 @@ namespace Aeon.LinearDrive
 
     /// <summary>
     /// Represents an operator that creates a message payload
-    /// that sets the current speed of the motor.
+    /// that sets the current speed of the motor, in rpm.
     /// </summary>
     [DisplayName("SetSpeedPayload")]
-    [Description("Creates a message payload that sets the current speed of the motor.")]
+    [Description("Creates a message payload that sets the current speed of the motor, in rpm.")]
     public partial class CreateSetSpeedPayload
     {
         /// <summary>
-        /// Gets or sets the value that sets the current speed of the motor.
+        /// Gets or sets the value that sets the current speed of the motor, in rpm.
         /// </summary>
-        [Description("The value that sets the current speed of the motor.")]
+        [Description("The value that sets the current speed of the motor, in rpm.")]
         public short SetSpeed { get; set; }
 
         /// <summary>
@@ -1876,7 +1876,7 @@ namespace Aeon.LinearDrive
         }
 
         /// <summary>
-        /// Creates a message that sets the current speed of the motor.
+        /// Creates a message that sets the current speed of the motor, in rpm.
         /// </summary>
         /// <param name="messageType">Specifies the type of the created message.</param>
         /// <returns>A new message for the SetSpeed register.</returns>
@@ -1888,14 +1888,14 @@ namespace Aeon.LinearDrive
 
     /// <summary>
     /// Represents an operator that creates a timestamped message payload
-    /// that sets the current speed of the motor.
+    /// that sets the current speed of the motor, in rpm.
     /// </summary>
     [DisplayName("TimestampedSetSpeedPayload")]
-    [Description("Creates a timestamped message payload that sets the current speed of the motor.")]
+    [Description("Creates a timestamped message payload that sets the current speed of the motor, in rpm.")]
     public partial class CreateTimestampedSetSpeedPayload : CreateSetSpeedPayload
     {
         /// <summary>
-        /// Creates a timestamped message that sets the current speed of the motor.
+        /// Creates a timestamped message that sets the current speed of the motor, in rpm.
         /// </summary>
         /// <param name="timestamp">The timestamp of the message payload, in seconds.</param>
         /// <param name="messageType">Specifies the type of the created message.</param>
@@ -1908,16 +1908,16 @@ namespace Aeon.LinearDrive
 
     /// <summary>
     /// Represents an operator that creates a message payload
-    /// that returns a periodic event with the current (mA) speed of the motor.
+    /// that returns a periodic event with the current speed of the motor, in rpm.
     /// </summary>
     [DisplayName("SpeedPayload")]
-    [Description("Creates a message payload that returns a periodic event with the current (mA) speed of the motor.")]
+    [Description("Creates a message payload that returns a periodic event with the current speed of the motor, in rpm.")]
     public partial class CreateSpeedPayload
     {
         /// <summary>
-        /// Gets or sets the value that returns a periodic event with the current (mA) speed of the motor.
+        /// Gets or sets the value that returns a periodic event with the current speed of the motor, in rpm.
         /// </summary>
-        [Description("The value that returns a periodic event with the current (mA) speed of the motor.")]
+        [Description("The value that returns a periodic event with the current speed of the motor, in rpm.")]
         public short Speed { get; set; }
 
         /// <summary>
@@ -1930,7 +1930,7 @@ namespace Aeon.LinearDrive
         }
 
         /// <summary>
-        /// Creates a message that returns a periodic event with the current (mA) speed of the motor.
+        /// Creates a message that returns a periodic event with the current speed of the motor, in rpm.
         /// </summary>
         /// <param name="messageType">Specifies the type of the created message.</param>
         /// <returns>A new message for the Speed register.</returns>
@@ -1942,14 +1942,14 @@ namespace Aeon.LinearDrive
 
     /// <summary>
     /// Represents an operator that creates a timestamped message payload
-    /// that returns a periodic event with the current (mA) speed of the motor.
+    /// that returns a periodic event with the current speed of the motor, in rpm.
     /// </summary>
     [DisplayName("TimestampedSpeedPayload")]
-    [Description("Creates a timestamped message payload that returns a periodic event with the current (mA) speed of the motor.")]
+    [Description("Creates a timestamped message payload that returns a periodic event with the current speed of the motor, in rpm.")]
     public partial class CreateTimestampedSpeedPayload : CreateSpeedPayload
     {
         /// <summary>
-        /// Creates a timestamped message that returns a periodic event with the current (mA) speed of the motor.
+        /// Creates a timestamped message that returns a periodic event with the current speed of the motor, in rpm.
         /// </summary>
         /// <param name="timestamp">The timestamp of the message payload, in seconds.</param>
         /// <param name="messageType">Specifies the type of the created message.</param>
@@ -1962,16 +1962,16 @@ namespace Aeon.LinearDrive
 
     /// <summary>
     /// Represents an operator that creates a message payload
-    /// that sets the maximum continuous current (mA) limit the drive is able to supply.
+    /// that sets the maximum continuous current limit the drive is able to supply, in mA.
     /// </summary>
     [DisplayName("LimitContinuousCurrentPayload")]
-    [Description("Creates a message payload that sets the maximum continuous current (mA) limit the drive is able to supply.")]
+    [Description("Creates a message payload that sets the maximum continuous current limit the drive is able to supply, in mA.")]
     public partial class CreateLimitContinuousCurrentPayload
     {
         /// <summary>
-        /// Gets or sets the value that sets the maximum continuous current (mA) limit the drive is able to supply.
+        /// Gets or sets the value that sets the maximum continuous current limit the drive is able to supply, in mA.
         /// </summary>
-        [Description("The value that sets the maximum continuous current (mA) limit the drive is able to supply.")]
+        [Description("The value that sets the maximum continuous current limit the drive is able to supply, in mA.")]
         public ushort LimitContinuousCurrent { get; set; } = 900;
 
         /// <summary>
@@ -1984,7 +1984,7 @@ namespace Aeon.LinearDrive
         }
 
         /// <summary>
-        /// Creates a message that sets the maximum continuous current (mA) limit the drive is able to supply.
+        /// Creates a message that sets the maximum continuous current limit the drive is able to supply, in mA.
         /// </summary>
         /// <param name="messageType">Specifies the type of the created message.</param>
         /// <returns>A new message for the LimitContinuousCurrent register.</returns>
@@ -1996,14 +1996,14 @@ namespace Aeon.LinearDrive
 
     /// <summary>
     /// Represents an operator that creates a timestamped message payload
-    /// that sets the maximum continuous current (mA) limit the drive is able to supply.
+    /// that sets the maximum continuous current limit the drive is able to supply, in mA.
     /// </summary>
     [DisplayName("TimestampedLimitContinuousCurrentPayload")]
-    [Description("Creates a timestamped message payload that sets the maximum continuous current (mA) limit the drive is able to supply.")]
+    [Description("Creates a timestamped message payload that sets the maximum continuous current limit the drive is able to supply, in mA.")]
     public partial class CreateTimestampedLimitContinuousCurrentPayload : CreateLimitContinuousCurrentPayload
     {
         /// <summary>
-        /// Creates a timestamped message that sets the maximum continuous current (mA) limit the drive is able to supply.
+        /// Creates a timestamped message that sets the maximum continuous current limit the drive is able to supply, in mA.
         /// </summary>
         /// <param name="timestamp">The timestamp of the message payload, in seconds.</param>
         /// <param name="messageType">Specifies the type of the created message.</param>
@@ -2016,16 +2016,16 @@ namespace Aeon.LinearDrive
 
     /// <summary>
     /// Represents an operator that creates a message payload
-    /// that sets the maximum peak current limit the drive is able to supply.
+    /// that sets the maximum peak current limit the drive is able to supply, in mA.
     /// </summary>
     [DisplayName("LimitPeakCurrentPayload")]
-    [Description("Creates a message payload that sets the maximum peak current limit the drive is able to supply.")]
+    [Description("Creates a message payload that sets the maximum peak current limit the drive is able to supply, in mA.")]
     public partial class CreateLimitPeakCurrentPayload
     {
         /// <summary>
-        /// Gets or sets the value that sets the maximum peak current limit the drive is able to supply.
+        /// Gets or sets the value that sets the maximum peak current limit the drive is able to supply, in mA.
         /// </summary>
-        [Description("The value that sets the maximum peak current limit the drive is able to supply.")]
+        [Description("The value that sets the maximum peak current limit the drive is able to supply, in mA.")]
         public ushort LimitPeakCurrent { get; set; } = 900;
 
         /// <summary>
@@ -2038,7 +2038,7 @@ namespace Aeon.LinearDrive
         }
 
         /// <summary>
-        /// Creates a message that sets the maximum peak current limit the drive is able to supply.
+        /// Creates a message that sets the maximum peak current limit the drive is able to supply, in mA.
         /// </summary>
         /// <param name="messageType">Specifies the type of the created message.</param>
         /// <returns>A new message for the LimitPeakCurrent register.</returns>
@@ -2050,14 +2050,14 @@ namespace Aeon.LinearDrive
 
     /// <summary>
     /// Represents an operator that creates a timestamped message payload
-    /// that sets the maximum peak current limit the drive is able to supply.
+    /// that sets the maximum peak current limit the drive is able to supply, in mA.
     /// </summary>
     [DisplayName("TimestampedLimitPeakCurrentPayload")]
-    [Description("Creates a timestamped message payload that sets the maximum peak current limit the drive is able to supply.")]
+    [Description("Creates a timestamped message payload that sets the maximum peak current limit the drive is able to supply, in mA.")]
     public partial class CreateTimestampedLimitPeakCurrentPayload : CreateLimitPeakCurrentPayload
     {
         /// <summary>
-        /// Creates a timestamped message that sets the maximum peak current limit the drive is able to supply.
+        /// Creates a timestamped message that sets the maximum peak current limit the drive is able to supply, in mA.
         /// </summary>
         /// <param name="timestamp">The timestamp of the message payload, in seconds.</param>
         /// <param name="messageType">Specifies the type of the created message.</param>
@@ -2130,8 +2130,8 @@ namespace Aeon.LinearDrive
         /// <summary>
         /// Initializes a new instance of the <see cref="LimitPositionPayload"/> structure.
         /// </summary>
-        /// <param name="minimum">The minimum allowed position of the motor</param>
-        /// <param name="maximum">The maximum allowed position of the motor</param>
+        /// <param name="minimum">The minimum allowed position of the motor, in encoder counts</param>
+        /// <param name="maximum">The maximum allowed position of the motor, in encoder counts</param>
         public LimitPositionPayload(
             int minimum,
             int maximum)
@@ -2141,12 +2141,12 @@ namespace Aeon.LinearDrive
         }
 
         /// <summary>
-        /// The minimum allowed position of the motor
+        /// The minimum allowed position of the motor, in encoder counts
         /// </summary>
         public int Minimum;
 
         /// <summary>
-        /// The maximum allowed position of the motor
+        /// The maximum allowed position of the motor, in encoder counts
         /// </summary>
         public int Maximum;
 
