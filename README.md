@@ -1,14 +1,16 @@
 # Aeon LinearDrive
 
-Commutator linear drive Harp device.
+A Harp device that drives a FAULHABER linear actuator over an RS232 link, exposing the motor's position, speed, and current limits as Harp registers. In Project Aeon it is the linear actuator of the Neuropixels commutation-translation system, paired with the ONIX commutator and adjusted in closed loop to maintain the right slack in the tethering cable. The device is controlled from Bonsai, or any .NET application, through the `Aeon.LinearDrive` package.
 
-Provides control of the linear drive to control the position of the commutator from Bonsai.
+## Getting started
 
-## Dependencies
+Flash the firmware and deploy the application to the Raspberry Pi Pico as described in [`firmware`](firmware), then drive the device through its Harp registers:
 
-The target must be running a firmware image built from the v1.18-swc branch of the MicroPython project.
+1. Set the reference with `HomePosition`, in encoder counts.
+2. Enable the driver by writing `1` to `EnableMotorDriver`.
+3. Command a target with `SetPosition`, and read the live `Position` event.
 
-Additionally, the SWC microharp package must be present on the filesystem of the target.
+Speed and safety limits are set through `LimitSpeed`, `LimitContinuousCurrent`, `LimitPeakCurrent`, and `LimitPosition`. The `Aeon.LinearDrive` package wraps the register interface for Bonsai and .NET; see [`software`](software).
 
 ## Harp register map
 
@@ -28,12 +30,14 @@ Additionally, the SWC microharp package must be present on the filesystem of the
 
 Velocity is the motor shaft speed in rpm and position is in motor encoder counts, both passed to the FAULHABER controller as-is. No gearhead or lead-screw conversion to linear displacement is applied on the device.
 
-## Quick Start
+## Dependencies
 
-To control the position of the linear drive:
-- set home
-- enable the drive
-- set position
+The device runs a MicroPython image on the RP2040, built from the `v1.18-swc` branch of the SWC MicroPython fork, which compiles in the `usbcdc` and `harpsync` modules the firmware relies on. The `microharp` framework and the application in [`firmware`](firmware) are copied onto the board filesystem.
+
+- MicroPython image: [`SainsburyWellcomeCentre/micropython` at `v1.18-swc`](https://github.com/SainsburyWellcomeCentre/micropython/tree/v1.18-swc)
+- microharp framework: [`micropython-microharp` at `df88717c`](https://github.com/SainsburyWellcomeCentre/micropython-microharp/tree/df88717c966ac3c177d1f9f41d29ec503de5deea). Pin this commit; the current version of microharp is an incompatible rewrite.
+
+A prebuilt firmware image is attached to each release, so building from source is only needed to change the firmware itself. See [`firmware`](firmware) for the flash and deploy steps.
 
 ## Citation Policy
 
